@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 import Container from '../Container';
 import Button from '../Button';
 import { siteConfig } from '@/data/site';
@@ -23,8 +24,25 @@ export default function Hero() {
             className="mb-8"
           >
             <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 p-1">
-              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-4xl font-bold text-gray-600 dark:text-gray-300">
-                {siteConfig.author.name.split(' ').map(word => word[0]).join('')}
+              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                {siteConfig.author.avatar ? (
+                  <Image
+                    src={siteConfig.author.avatar}
+                    alt={siteConfig.author.name}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover object-bottom rounded-full"
+                    style={{ 
+                      aspectRatio: '1/1', 
+                      objectPosition: '0% 65%'
+                    }}
+                    priority
+                  />
+                ) : (
+                  <div className="text-4xl font-bold text-gray-600 dark:text-gray-300">
+                    {siteConfig.author.name.split(' ').map(word => word[0]).join('')}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
