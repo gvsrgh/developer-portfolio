@@ -11,7 +11,7 @@ const navigation = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { href: '/skills', label: 'Skills' },
+  { href: '/certifications', label: 'Certifications' },
   { href: '/coding-platforms', label: 'Platforms' },
   { href: '/contact', label: 'Contact' },
 ];
