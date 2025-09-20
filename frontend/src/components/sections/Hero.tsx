@@ -121,7 +121,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="animate-bounce cursor-pointer"
             onClick={() => {
-              const aboutSection = document.getElementById('about');
+              const aboutSection = document.getElementById('home-about');
               if (aboutSection) {
                 aboutSection.scrollIntoView({ behavior: 'smooth' });
               }
