@@ -294,7 +294,7 @@ export default function CertificationsShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
+                  whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                   className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300"
                   onClick={() => setSelectedCertification(cert)}
                   style={{
@@ -347,7 +347,7 @@ export default function CertificationsShowcase() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
+                whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedCertification(cert)}
                 style={{

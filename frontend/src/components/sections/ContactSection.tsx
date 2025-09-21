@@ -133,25 +133,12 @@ export default function ContactSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 -m-4"
+                  className="flex items-start space-x-4 p-4 rounded-lg -m-4"
                 >
                   <div className="flex-shrink-0">
-                    <motion.div 
-                      className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center transition-all duration-300"
-                      whileHover={{ scale: 1.1 }}
-                      style={{
-                        filter: 'drop-shadow(0 0 0 transparent)',
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.4))';
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                      }}
-                    >
+                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
                       <method.icon className="w-6 h-6 text-purple-500" />
-                    </motion.div>
+                    </div>
                   </div>
                   <div className="flex-grow">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
@@ -189,15 +176,6 @@ export default function ContactSection() {
                     whileHover={{ scale: 1.1 }}
                     className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all duration-300 ${social.color}`}
                     title={`${social.label} - ${social.username}`}
-                    style={{
-                      filter: 'drop-shadow(0 0 0 transparent)',
-                    }}
-                    onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                      e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.4))';
-                    }}
-                    onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                      e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                    }}
                   >
                     <social.icon className="w-6 h-6" />
                   </motion.a>
@@ -231,7 +209,18 @@ export default function ContactSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
+            <div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.4))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Send a Message
               </h2>
@@ -265,7 +254,7 @@ export default function ContactSection() {
                       onChange={handleInputChange}
                       required
                       suppressHydrationWarning
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-300 focus:border-transparent"
                       placeholder="Your name"
                     />
                   </div>
@@ -281,7 +270,7 @@ export default function ContactSection() {
                       onChange={handleInputChange}
                       required
                       suppressHydrationWarning
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-300 focus:border-transparent"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -299,7 +288,7 @@ export default function ContactSection() {
                     onChange={handleInputChange}
                     required
                     suppressHydrationWarning
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-300 focus:border-transparent"
                     placeholder="What would you like to discuss?"
                   />
                 </div>
@@ -316,7 +305,7 @@ export default function ContactSection() {
                     required
                     rows={6}
                     suppressHydrationWarning
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-vertical"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-300 focus:border-transparent resize-vertical"
                     placeholder="Tell me about your project, opportunity, or just say hello..."
                   />
                 </div>

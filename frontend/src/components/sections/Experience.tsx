@@ -61,11 +61,11 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          whileHover={{ y: -4 }}
-          className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg p-8 text-white mb-12 hover:shadow-2xl transition-all duration-500"
+          whileHover={{ y: -4, transition: { duration: 0.1 } }}
+          className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg p-8 text-white mb-12 hover:shadow-2xl transition-all duration-100"
           style={{
             filter: 'drop-shadow(0 0 0 transparent)',
-            transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+            transition: 'all 0.1s ease-in-out, filter 0.1s ease-in-out',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.5))';
@@ -97,11 +97,11 @@ export default function Experience() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-2xl transition-all duration-500 group"
+              whileHover={{ y: -6, transition: { duration: 0.1 } }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-2xl transition-all duration-100 group"
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
-                transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+                transition: 'all 0.1s ease-in-out, filter 0.1s ease-in-out',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))';
@@ -111,7 +111,7 @@ export default function Experience() {
               }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-all duration-300">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-all duration-100">
                   <highlight.icon className="w-6 h-6 text-purple-500 group-hover:text-purple-600 transition-colors" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">

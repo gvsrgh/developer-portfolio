@@ -132,7 +132,6 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh/Liver-Function-Analysis-Using-Python',
     },
-    cover: '/projects/liver-analysis.png',
     highlights: [
       'Predictive model for liver disease diagnosis',
       'Comprehensive data preprocessing pipeline',

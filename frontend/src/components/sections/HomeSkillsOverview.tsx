@@ -84,7 +84,7 @@ export default function HomeSkillsOverview() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                whileHover={{ y: -8, transition: { duration: 0.1 } }}
                 className="group"
               >
                 <div 

@@ -29,14 +29,14 @@ export default function AboutHero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -4, transition: { duration: 0.1 } }}
             className="relative group"
           >
             <div 
               className="relative w-full aspect-square max-w-md mx-auto"
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
-                transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+                transition: 'all 0.1s ease-in-out, filter 0.1s ease-in-out',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.4))';
@@ -45,15 +45,15 @@ export default function AboutHero() {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-2 transform -rotate-1 group-hover:-rotate-3 transition-transform duration-300">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-200"></div>
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-2 transform -rotate-1 group-hover:-rotate-3 transition-transform duration-200">
                 {siteConfig.author.avatar ? (
                   <Image
                     src={siteConfig.author.avatar}
                     alt={siteConfig.author.name}
                     width={400}
                     height={400}
-                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-200"
                     priority
                   />
                 ) : (
@@ -85,40 +85,73 @@ export default function AboutHero() {
 
             <div className="space-y-4">
               <motion.div 
-                className="flex items-center space-x-3 group hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
-                whileHover={{ x: 4 }}
+                className="flex items-center space-x-3 group hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
+                whileHover={{ x: 4, transition: { duration: 0.1 } }}
               >
-                <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
+                <span className="text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-100">
                   <strong>Role:</strong> {siteConfig.author.role}
                 </span>
               </motion.div>
               
               <motion.div 
-                className="flex items-center space-x-3 group hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
-                whileHover={{ x: 4 }}
+                className="flex items-center space-x-3 group hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
+                whileHover={{ x: 4, transition: { duration: 0.1 } }}
               >
-                <div className="w-2 h-2 bg-green-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                <div className="w-2 h-2 bg-green-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
+                <span className="text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-100">
                   <strong>Location:</strong> {siteConfig.author.location}
                 </span>
               </motion.div>
 
               <motion.div 
-                className="flex items-center space-x-3 group hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
-                whileHover={{ x: 4 }}
+                className="flex items-center space-x-3 group hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
+                whileHover={{ x: 4, transition: { duration: 0.1 } }}
               >
-                <div className="w-2 h-2 bg-purple-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                <div className="w-2 h-2 bg-purple-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
+                <span className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-100">
                   <strong>Focus Areas:</strong> 
                   <span className="ml-2 inline-flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors cursor-default">
+                    <span 
+                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
+                      style={{
+                        filter: 'drop-shadow(0 0 0 transparent)',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.5))';
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                      }}
+                    >
                       Web Development
                     </span>
-                    <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors cursor-default">
+                    <span 
+                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
+                      style={{
+                        filter: 'drop-shadow(0 0 0 transparent)',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.5))';
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                      }}
+                    >
                       Machine Learning
                     </span>
-                    <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors cursor-default">
+                    <span 
+                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
+                      style={{
+                        filter: 'drop-shadow(0 0 0 transparent)',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.5))';
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                      }}
+                    >
                       Mobile Apps
                     </span>
                   </span>
@@ -128,9 +161,9 @@ export default function AboutHero() {
 
             <motion.div 
               className="pt-4"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.1 } }}
             >
-              <p className="text-lg font-medium text-gray-900 dark:text-white italic hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300">
+              <p className="text-lg font-medium text-gray-900 dark:text-white italic hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-100">
                 &ldquo;{siteConfig.author.tagline}&rdquo;
               </p>
             </motion.div>
