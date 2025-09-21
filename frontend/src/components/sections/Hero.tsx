@@ -20,7 +20,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
             whileHover={{ scale: 1.05 }}
             className="mb-8 group"
           >
@@ -63,7 +63,7 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.2, delay: 0 }}
             whileHover={{ scale: 1.02 }}
             className="text-4xl md:text-6xl font-bold text-gray-700 dark:text-gray-200 mb-4 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-300 cursor-default"
             style={{
@@ -83,7 +83,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.2, delay: 0 }}
             whileHover={{ scale: 1.02 }}
             className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-6 hover:text-purple-500 dark:hover:text-purple-300 transition-all duration-300 cursor-default"
             style={{
@@ -103,7 +103,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0 }}
             whileHover={{ scale: 1.01 }}
             className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto hover:text-green-500 dark:hover:text-green-300 transition-all duration-300 cursor-default"
             style={{
@@ -123,7 +123,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.2, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <motion.div
@@ -166,7 +166,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.2, delay: 0.25 }}
             className="flex justify-center space-x-6 mb-16"
           >
             {Object.entries(siteConfig.social).map(([platform, url]) => {
@@ -205,7 +205,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.2, delay: 0.3 }}
             className="animate-bounce cursor-pointer"
             onClick={() => {
               const aboutSection = document.getElementById('home-about');
