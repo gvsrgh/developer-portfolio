@@ -45,9 +45,11 @@ export default function HomeCallToAction() {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white
+                          leading-tight md:leading-[1.15] lg:leading-[1.1] mb-8">
               Let&apos;s Build Something
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r
+                              from-yellow-400 to-orange-400 leading-tight pb-1">
                 Amazing Together
               </span>
             </h2>
