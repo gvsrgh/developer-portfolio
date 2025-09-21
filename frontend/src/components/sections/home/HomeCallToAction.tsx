@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Mail, ArrowRight, Coffee, Users, Lightbulb } from 'lucide-react';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 import { siteConfig } from '@/data/site';
 
 const opportunityTypes = [

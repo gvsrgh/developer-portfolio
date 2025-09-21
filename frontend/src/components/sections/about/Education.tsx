@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { GraduationCap, Calendar, MapPin } from 'lucide-react';
-import Container from '../Container';
+import Container from '../../Container';
 
 interface EducationItem {
   degree: string;

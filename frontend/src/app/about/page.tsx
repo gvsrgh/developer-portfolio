@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import AboutHero from '@/components/sections/AboutHero';
-import Education from '@/components/sections/Education';
-import Experience from '@/components/sections/Experience';
-import CVDownload from '@/components/sections/CVDownload';
+import AboutHero from '@/components/sections/about/AboutHero';
+import Education from '@/components/sections/about/Education';
+import Experience from '@/components/sections/about/Experience';
+import CVDownload from '@/components/sections/about/CVDownload';
 
 export const metadata: Metadata = {
   title: 'About - Govvala Venkata Sai Ram',

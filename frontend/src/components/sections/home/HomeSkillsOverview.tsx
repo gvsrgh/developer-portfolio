@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Code, Database, Smartphone, Shield, ArrowRight } from 'lucide-react';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 
 const skillCategories = [
   {

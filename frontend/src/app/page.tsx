@@ -1,8 +1,8 @@
-import Hero from "@/components/sections/Hero";
-import HomeAbout from "@/components/sections/HomeAbout";
-import HomeFeaturedProjects from "@/components/sections/HomeFeaturedProjects";
-import HomeSkillsOverview from "@/components/sections/HomeSkillsOverview";
-import HomeCallToAction from "@/components/sections/HomeCallToAction";
+import Hero from "@/components/sections/home/Hero";
+import HomeAbout from "@/components/sections/home/HomeAbout";
+import HomeFeaturedProjects from "@/components/sections/home/HomeFeaturedProjects";
+import HomeSkillsOverview from "@/components/sections/home/HomeSkillsOverview";
+import HomeCallToAction from "@/components/sections/home/HomeCallToAction";
 
 export default function Home() {
   return (

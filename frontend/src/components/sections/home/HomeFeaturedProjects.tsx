@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github, X, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 import { getFeaturedProjects } from '@/data/projects';
 import { Project } from '@/lib/types';
 

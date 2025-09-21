@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Download, FileText, Mail } from 'lucide-react';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 import { siteConfig } from '@/data/site';
 
 export default function CVDownload() {

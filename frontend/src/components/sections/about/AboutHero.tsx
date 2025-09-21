@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Container from '../Container';
+import Container from '../../Container';
 import { siteConfig } from '@/data/site';
 
 export default function AboutHero() {

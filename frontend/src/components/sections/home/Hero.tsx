@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 import { siteConfig } from '@/data/site';
 
 export default function Hero() {

@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Container from '../Container';
-import Button from '../Button';
+import Container from '../../Container';
+import Button from '../../Button';
 import { siteConfig } from '@/data/site';
 
 export default function HomeAbout() {

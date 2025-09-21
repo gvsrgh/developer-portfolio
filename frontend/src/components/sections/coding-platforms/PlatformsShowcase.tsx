@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, Trophy, Star, Users, Code, TrendingUp, Award, Target, LucideIcon } from 'lucide-react';
-import Container from '../Container';
+import Container from '../../Container';
 
 interface Platform {
   id: string;

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Code, Users, Target, Lightbulb, LucideIcon } from 'lucide-react';
-import Container from '../Container';
+import Container from '../../Container';
 
 interface ExperienceHighlight {
   icon: LucideIcon;

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Award, Calendar, ExternalLink, Download, Filter, Search, CheckCircle, Star } from 'lucide-react';
-import Container from '../Container';
+import Container from '../../Container';
 
 interface Certification {
   id: string;

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, Clock, CheckCircle, LucideIcon } from 'lucide-react';
-import Container from '../Container';
+import Container from '../../Container';
 import { siteConfig } from '@/data/site';
 
 interface ContactMethod {

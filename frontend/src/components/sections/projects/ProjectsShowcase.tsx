@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, Github, Calendar, Filter, Search, X } from 'lucide-react';
 import Image from 'next/image';
-import Container from '../Container';
+import Container from '../../Container';
 import { projects } from '@/data/projects';
 import { Project } from '@/lib/types';
 
