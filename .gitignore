@@ -100,15 +100,9 @@ temp/
 *.sln
 *.sw?
 
-# Docker
-*.log
-
 # OS generated files
 Thumbs.db
 ehthumbs.db
 
 # TypeScript
 *.tsbuildinfo
-
-# github
-.github/

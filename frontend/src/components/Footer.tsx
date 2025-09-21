@@ -85,9 +85,14 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                © {new Date().getFullYear()} {siteConfig.author.name}. All rights reserved.
-              </p>
+              <div className="text-center md:text-left">
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  © {new Date().getFullYear()} {siteConfig.author.name}. All rights reserved.
+                </p>
+                <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">
+                  🚀 Portfolio updated weekly • Found an issue? <Link href="/contact" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline">Contact me</Link>
+                </p>
+              </div>
               <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
                 Made with <Heart className="h-4 w-4 text-red-500 mx-1" /> using Next.js & Tailwind CSS
               </p>
