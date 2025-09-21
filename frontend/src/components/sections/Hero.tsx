@@ -65,7 +65,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ scale: 1.02 }}
-            className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 cursor-default"
+            className="text-4xl md:text-6xl font-bold text-gray-700 dark:text-gray-200 mb-4 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
@@ -85,7 +85,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             whileHover={{ scale: 1.02 }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-6 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 cursor-default"
+            className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-6 hover:text-purple-500 dark:hover:text-purple-300 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
@@ -105,7 +105,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             whileHover={{ scale: 1.01 }}
-            className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto hover:text-green-600 dark:hover:text-green-400 transition-all duration-300 cursor-default"
+            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto hover:text-green-500 dark:hover:text-green-300 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}

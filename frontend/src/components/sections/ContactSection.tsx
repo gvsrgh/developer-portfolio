@@ -325,7 +325,18 @@ export default function ContactSection() {
                   type="submit"
                   disabled={isSubmitting}
                   suppressHydrationWarning
-                  className="w-full flex items-center justify-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    filter: 'drop-shadow(0 0 0 transparent)',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+                    if (!isSubmitting) {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))';
+                    }
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  }}
                 >
                   {isSubmitting ? (
                     <>
@@ -343,10 +354,16 @@ export default function ContactSection() {
 
               {/* Response Time */}
               <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div className="flex items-center">
+                <div className="flex items-center mb-2">
                   <Clock className="w-4 h-4 text-gray-500 mr-2" />
                   <span className="text-sm text-gray-600 dark:text-gray-300">
                     I typically respond within 24-48 hours
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 text-purple-500 mr-2" />
+                  <span className="text-sm text-purple-600 dark:text-purple-400 font-medium">
+                    You&apos;ll receive a confirmation email once your message is sent
                   </span>
                 </div>
               </div>

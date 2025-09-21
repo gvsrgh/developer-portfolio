@@ -130,8 +130,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          whileHover={{ y: -4 }}
-          className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8 hover:shadow-xl transition-all duration-500"
+          className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8"
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Let&apos;s Build Something Amazing Together

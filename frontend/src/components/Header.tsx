@@ -28,7 +28,16 @@ export default function Header() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-xl font-bold text-gray-900 dark:text-white"
+              className="text-xl font-bold text-gray-900 dark:text-white transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.4))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
             >
               {siteConfig.author.name.split(' ').map(word => word[0]).join('')}
             </motion.div>
@@ -45,7 +54,16 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-200 font-medium"
+                  className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-all duration-300 font-medium"
+                  style={{
+                    filter: 'drop-shadow(0 0 0 transparent)',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 8px rgba(147, 51, 234, 0.4))';
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -83,8 +101,17 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="block py-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-200 font-medium"
+                    className="block py-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-all duration-300 font-medium"
                     onClick={() => setIsOpen(false)}
+                    style={{
+                      filter: 'drop-shadow(0 0 0 transparent)',
+                    }}
+                    onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.4))';
+                    }}
+                    onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                    }}
                   >
                     {item.label}
                   </Link>

@@ -182,19 +182,63 @@ export default function CertificationsShowcase() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            <div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.5))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-purple-500">{stats.total}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Total</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            <div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.5))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-green-500">{stats.completed}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Completed</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            <div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(234, 179, 8, 0.5))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-yellow-500">{stats.inProgress}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">In Progress</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            <div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.5))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-blue-500">{stats.planned}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Planned</div>
             </div>
@@ -250,14 +294,14 @@ export default function CertificationsShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
                   className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300"
                   onClick={() => setSelectedCertification(cert)}
                   style={{
                     filter: 'drop-shadow(0 0 0 transparent)',
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                    e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.5))';
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.7))';
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -303,14 +347,14 @@ export default function CertificationsShowcase() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedCertification(cert)}
                 style={{
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))';
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(59, 130, 246, 0.5))';
                 }}
                 onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';

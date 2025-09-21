@@ -366,7 +366,7 @@ export default function PlatformsShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
                   className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300`}
                   onClick={() => setSelectedPlatform(platform)}
                   style={{
@@ -417,7 +417,7 @@ export default function PlatformsShowcase() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedPlatform(platform)}
                 style={{
