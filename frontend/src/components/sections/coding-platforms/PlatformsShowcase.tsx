@@ -26,6 +26,23 @@ interface Platform {
   category: 'competitive' | 'practice' | 'learning' | 'collaboration';
 }
 
+interface Category {
+  value: string;
+  label: string;
+}
+
+interface PlatformsShowcaseProps {
+  categories?: Category[];
+}
+
+const defaultCategories: Category[] = [
+  { value: 'all', label: 'All Platforms' },
+  { value: 'competitive', label: 'Competitive Programming' },
+  { value: 'practice', label: 'Practice & Skills' },
+  { value: 'learning', label: 'Learning & Courses' },
+  { value: 'collaboration', label: 'Collaboration & Projects' }
+];
+
 const platforms: Platform[] = [
   {
     id: 'leetcode',
@@ -209,15 +226,7 @@ const platforms: Platform[] = [
   }
 ];
 
-const categories = [
-  { value: 'all', label: 'All Platforms' },
-  { value: 'competitive', label: 'Competitive Programming' },
-  { value: 'practice', label: 'Practice & Skills' },
-  { value: 'learning', label: 'Learning & Courses' },
-  { value: 'collaboration', label: 'Collaboration & Projects' }
-];
-
-export default function PlatformsShowcase() {
+export default function PlatformsShowcase({ categories = defaultCategories }: PlatformsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
 

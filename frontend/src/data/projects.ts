@@ -8,6 +8,7 @@ export const projects: Project[] = [
     description: 'Edubot+ is an intelligent chatbot system leveraging Natural Language Processing to provide personalized student support, answer academic queries, and assist with educational tasks. The bot is designed to understand context and provide relevant responses to enhance the learning experience.',
     year: '2025',
     stack: ['Python', 'Natural Language Processing', 'Machine Learning', 'TensorFlow', 'Flask', 'API Development'],
+    category: 'ai', // Manual category assignment
     links: {},
     highlights: [
       'Advanced NLP algorithms for understanding student queries',
@@ -47,6 +48,7 @@ export const projects: Project[] = [
     year: '2025',
     duration: 'Jan 2025 - Apr 2025',
     stack: ['Full-Stack Development', 'Node.js', 'Express.js', 'Session Management', 'React.js', 'JSON Web Token (JWT)', 'MongoDB', 'Database Administration', 'Realtime Programming', 'Front-End Development', 'Back-End Web Development'],
+    category: 'web', // Manual category assignment
     links: {
       live: 'https://pvpsit-events.vercel.app/',
       github: 'https://github.com/gvsrgh/PVPSIT-Events-Page',
@@ -207,6 +209,7 @@ export const projects: Project[] = [
     year: '2024',
     duration: 'Jul 2024 - Jul 2024',
     stack: ['Programming', 'Problem Solving', 'Java', 'Game Development'],
+    category: 'programming',
     links: {
       github: 'https://github.com/gvsrgh/Java-Project-Works/tree/main/Guess%20me',
     },

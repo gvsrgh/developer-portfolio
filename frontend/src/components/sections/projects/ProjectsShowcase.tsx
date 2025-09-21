@@ -8,7 +8,16 @@ import Container from '../../Container';
 import { projects } from '@/data/projects';
 import { Project } from '@/lib/types';
 
-const categories = [
+interface Category {
+  value: string;
+  label: string;
+}
+
+interface ProjectsShowcaseProps {
+  categories?: Category[];
+}
+
+const defaultCategories: Category[] = [
   { value: 'all', label: 'All Projects' },
   { value: 'web', label: 'Web Development' },
   { value: 'mobile', label: 'Mobile Apps' },
@@ -43,6 +52,16 @@ const getCategoryFromStack = (stack: string[]): string => {
   return 'programming';
 };
 
+const getCategoryFromProject = (project: Project): string => {
+  // Use manual category if provided, otherwise use automatic categorization
+  if (project.category) {
+    return project.category;
+  }
+
+  // Fall back to automatic categorization based on stack
+  return getCategoryFromStack(project.stack);
+};
+
 const getCategoryGradient = (category: string): string => {
   const gradients = {
     web: 'from-blue-400 to-purple-500',
@@ -56,7 +75,7 @@ const getCategoryGradient = (category: string): string => {
   return gradients[category as keyof typeof gradients] || gradients.programming;
 };
 
-export default function ProjectsShowcase() {
+export default function ProjectsShowcase({ categories = defaultCategories }: ProjectsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -79,7 +98,7 @@ export default function ProjectsShowcase() {
   }, [zoomedImage, selectedProject]);
 
   const filteredProjects = projects.filter(project => {
-    const projectCategory = getCategoryFromStack(project.stack);
+    const projectCategory = getCategoryFromProject(project);
     const matchesCategory = selectedCategory === 'all' || projectCategory === selectedCategory;
     const matchesSearch =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -146,14 +165,14 @@ export default function ProjectsShowcase() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
+              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer hover:brightness-110"
               onClick={() => setSelectedProject(project)}
-              style={{ filter: 'drop-shadow(0 0 0 transparent)' }}
+              style={{ filter: 'drop-shadow(0 0 0 transparent) brightness(1)' }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4)) brightness(1.1)';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent) brightness(1)';
               }}
             >
               {/* Project Image */}
@@ -181,13 +200,13 @@ export default function ProjectsShowcase() {
                 ) : (
                   <div
                     className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
-                      getCategoryFromStack(project.stack)
+                      getCategoryFromProject(project)
                     )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
                   >
                     <div className="text-center px-4">
                       <h3 className="text-white font-bold text-lg mb-2">{project.title}</h3>
                       <p className="text-white/80 text-sm">
-                        {getCategoryFromStack(project.stack).toUpperCase()}
+                        {getCategoryFromProject(project).toUpperCase()}
                       </p>
                     </div>
                   </div>
@@ -333,13 +352,13 @@ export default function ProjectsShowcase() {
                       ) : (
                         <div
                           className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
-                            getCategoryFromStack(selectedProject.stack)
+                            getCategoryFromProject(selectedProject)
                           )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
                         >
                           <div className="text-center px-4">
                             <h3 className="text-white font-bold text-xl mb-2">{selectedProject.title}</h3>
                             <p className="text-white/80">
-                              {getCategoryFromStack(selectedProject.stack).toUpperCase()}
+                              {getCategoryFromProject(selectedProject).toUpperCase()}
                             </p>
                           </div>
                         </div>

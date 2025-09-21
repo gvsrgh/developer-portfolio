@@ -21,6 +21,25 @@ interface Certification {
   featured: boolean;
 }
 
+interface Category {
+  value: string;
+  label: string;
+}
+
+interface CertificationsShowcaseProps {
+  categories?: Category[];
+}
+
+const defaultCategories: Category[] = [
+  { value: 'all', label: 'All Certifications' },
+  { value: 'cloud', label: 'Cloud Computing' },
+  { value: 'data', label: 'Data Analytics' },
+  { value: 'networking', label: 'Networking' },
+  { value: 'programming', label: 'Programming' },
+  { value: 'ml', label: 'Machine Learning' },
+  { value: 'it', label: 'IT Support' }
+];
+
 const certifications: Certification[] = [
   {
     id: 'aws-cloud-practitioner',
@@ -120,16 +139,6 @@ const certifications: Certification[] = [
   }
 ];
 
-const categories = [
-  { value: 'all', label: 'All Certifications' },
-  { value: 'cloud', label: 'Cloud Computing' },
-  { value: 'data', label: 'Data Analytics' },
-  { value: 'networking', label: 'Networking' },
-  { value: 'programming', label: 'Programming' },
-  { value: 'ml', label: 'Machine Learning' },
-  { value: 'it', label: 'IT Support' }
-];
-
 const statusColors = {
   completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
   'in-progress': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
@@ -142,7 +151,7 @@ const levelColors = {
   advanced: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
 };
 
-export default function CertificationsShowcase() {
+export default function CertificationsShowcase({ categories = defaultCategories }: CertificationsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCertification, setSelectedCertification] = useState<Certification | null>(null);
@@ -182,8 +191,9 @@ export default function CertificationsShowcase() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
-            <div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -2 }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
@@ -196,9 +206,10 @@ export default function CertificationsShowcase() {
             >
               <div className="text-2xl font-bold text-purple-500">{stats.total}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Total</div>
-            </div>
-            <div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -2 }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
@@ -211,9 +222,10 @@ export default function CertificationsShowcase() {
             >
               <div className="text-2xl font-bold text-green-500">{stats.completed}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Completed</div>
-            </div>
-            <div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -2 }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
@@ -226,9 +238,10 @@ export default function CertificationsShowcase() {
             >
               <div className="text-2xl font-bold text-yellow-500">{stats.inProgress}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">In Progress</div>
-            </div>
-            <div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md transition-all duration-300"
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -2 }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
@@ -241,7 +254,7 @@ export default function CertificationsShowcase() {
             >
               <div className="text-2xl font-bold text-blue-500">{stats.planned}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Planned</div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Search and Filter */}

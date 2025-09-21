@@ -7,6 +7,7 @@ export interface Project {
   year: string;
   duration?: string;
   stack: string[];
+  category?: string; // Optional manual category override - if not provided, auto-categorizes based on stack
   links: {
     live?: string;
     github?: string;
