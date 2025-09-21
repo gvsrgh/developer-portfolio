@@ -14,6 +14,7 @@ export interface Project {
   cover: string;
   highlights: string[];
   featured?: boolean;
+  status?: 'completed' | 'in-progress' | 'planning';
 }
 
 export interface SkillCategory {

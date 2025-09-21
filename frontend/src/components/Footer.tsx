@@ -15,9 +15,7 @@ const quickLinks = [
 
 const socialIcons = {
   github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  email: Mail,
+  linkedin: Linkedin
 };
 
 export default function Footer() {

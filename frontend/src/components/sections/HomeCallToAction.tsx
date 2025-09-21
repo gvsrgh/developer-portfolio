@@ -1,9 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Mail, ArrowRight, Coffee, Users, Lightbulb } from 'lucide-react';
 import Container from '../Container';
 import Button from '../Button';
+import { siteConfig } from '@/data/site';
 
 const opportunityTypes = [
   {
@@ -145,9 +147,12 @@ export default function HomeCallToAction() {
           >
             <p className="mb-2">Ready to connect? I typically respond within 24-48 hours.</p>
             <p className="text-sm">
-              <a href="mailto:gvsrgh@example.com" className="text-yellow-400 hover:text-yellow-300 transition-colors font-medium">
-                gvsrgh@example.com
-              </a>
+              <Link 
+                href="/contact" 
+                className="text-yellow-400 hover:text-yellow-300 transition-colors font-medium hover:underline"
+              >
+                {siteConfig.author.email}
+              </Link>
             </p>
           </motion.div>
         </div>

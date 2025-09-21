@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Code, Database, Smartphone, Shield, ArrowRight } from 'lucide-react';
 import Container from '../Container';
 import Button from '../Button';
@@ -10,40 +11,51 @@ const skillCategories = [
     icon: Code,
     title: "Frontend Development",
     description: "Building responsive and interactive user interfaces",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript"],
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript", "HTML", "CSS"],
     color: "from-blue-500 to-cyan-500"
   },
   {
     icon: Database,
     title: "Backend Development",
     description: "Creating robust server-side applications and APIs",
-    skills: ["Node.js", "Python", "Java", "PostgreSQL", "MongoDB"],
+    skills: ["Node.js", "Python", "Java", "PostgreSQL", "MongoDB", "Express.js", "REST APIs"],
     color: "from-green-500 to-emerald-500"
   },
   {
     icon: Smartphone,
     title: "Mobile Development",
-    description: "Developing cross-platform mobile applications",
-    skills: ["React Native", "Flutter", "Android", "iOS", "Expo"],
+    description: "Developing various mobile applications",
+    skills: ["React Native", "Flutter", "Android", "Java", "Dart", "Mobile UI/UX"],
     color: "from-purple-500 to-pink-500"
   },
   {
     icon: Shield,
     title: "Security & DevOps",
     description: "Implementing security best practices and deployment",
-    skills: ["Network Security", "Docker", "AWS", "Git", "Linux"],
+    skills: ["Network Security", "Docker", "AWS", "Git", "Linux", "CI/CD", "DevOps"],
     color: "from-orange-500 to-red-500"
   }
 ];
 
 const stats = [
-  { label: "Projects Completed", value: "15+", description: "Various web and mobile applications" },
-  { label: "Technologies", value: "20+", description: "Programming languages and frameworks" },
-  { label: "Certifications", value: "8+", description: "Professional certifications earned" },
+  { label: "Projects Completed", value: "5+", description: "Various web and mobile applications" },
+  { label: "Technologies", value: "10+", description: "Programming languages and frameworks" },
+  { label: "Certifications", value: "5+", description: "Professional certifications earned" },
   { label: "Experience", value: "2+", description: "Years of coding and development" }
 ];
 
 export default function HomeSkillsOverview() {
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+
+  const toggleCategory = (categoryTitle: string) => {
+    const newExpanded = new Set(expandedCategories);
+    if (newExpanded.has(categoryTitle)) {
+      newExpanded.delete(categoryTitle);
+    } else {
+      newExpanded.add(categoryTitle);
+    }
+    setExpandedCategories(newExpanded);
+  };
   return (
     <section className="py-20 bg-white dark:bg-gray-800">
       <Container>
@@ -90,7 +102,7 @@ export default function HomeSkillsOverview() {
 
                   {/* Skills */}
                   <div className="flex flex-wrap gap-2">
-                    {category.skills.slice(0, 3).map((skill) => (
+                    {(expandedCategories.has(category.title) ? category.skills : category.skills.slice(0, 3)).map((skill) => (
                       <span
                         key={skill}
                         className="px-2 py-1 bg-white dark:bg-gray-600 text-xs font-medium rounded-md text-gray-700 dark:text-gray-200"
@@ -98,10 +110,21 @@ export default function HomeSkillsOverview() {
                         {skill}
                       </span>
                     ))}
-                    {category.skills.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300">
+                    {category.skills.length > 3 && !expandedCategories.has(category.title) && (
+                      <button
+                        onClick={() => toggleCategory(category.title)}
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer"
+                      >
                         +{category.skills.length - 3}
-                      </span>
+                      </button>
+                    )}
+                    {expandedCategories.has(category.title) && category.skills.length > 3 && (
+                      <button
+                        onClick={() => toggleCategory(category.title)}
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer"
+                      >
+                        Show less
+                      </button>
                     )}
                   </div>
                 </div>

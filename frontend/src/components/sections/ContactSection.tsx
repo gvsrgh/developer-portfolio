@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, Clock, CheckCircle, LucideIcon } from 'lucide-react';
 import Container from '../Container';
+import { siteConfig } from '@/data/site';
 
 interface ContactMethod {
   icon: LucideIcon;
@@ -25,14 +26,14 @@ const contactMethods: ContactMethod[] = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'gvsrgh@example.com',
-    href: 'mailto:gvsrgh@example.com',
+    value: siteConfig.author.email,
+    href: '#',
     description: 'Best for detailed discussions and formal inquiries'
   },
   {
     icon: MapPin,
     label: 'Location',
-    value: 'Vijayawada, India',
+    value: 'India',
     href: '#',
     description: 'Open to remote work and on-site opportunities'
   }
@@ -49,16 +50,9 @@ const socialLinks: SocialLink[] = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/gvsrgh',
-    username: 'gvsrgh',
+    href: 'https://linkedin.com/in/gvsr',
+    username: 'gvsr',
     color: 'hover:text-blue-600'
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    href: 'mailto:gvsrgh@example.com',
-    username: 'gvsrgh@example.com',
-    color: 'hover:text-purple-500'
   }
 ];
 
@@ -234,7 +228,7 @@ export default function ContactSection() {
                 </motion.div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" suppressHydrationWarning>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -247,6 +241,7 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
+                      suppressHydrationWarning
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       placeholder="Your name"
                     />
@@ -262,6 +257,7 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
+                      suppressHydrationWarning
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       placeholder="your.email@example.com"
                     />
@@ -279,6 +275,7 @@ export default function ContactSection() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
+                    suppressHydrationWarning
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     placeholder="What would you like to discuss?"
                   />
@@ -295,6 +292,7 @@ export default function ContactSection() {
                     onChange={handleInputChange}
                     required
                     rows={6}
+                    suppressHydrationWarning
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-vertical"
                     placeholder="Tell me about your project, opportunity, or just say hello..."
                   />
@@ -303,6 +301,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
+                  suppressHydrationWarning
                   className="w-full flex items-center justify-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (

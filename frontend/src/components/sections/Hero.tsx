@@ -99,19 +99,27 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="flex justify-center space-x-6 mb-16"
           >
-            {Object.entries(siteConfig.social).map(([platform, url]) => (
-              <motion.a
-                key={platform}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors duration-200 capitalize"
-              >
-                {platform}
-              </motion.a>
-            ))}
+            {Object.entries(siteConfig.social).map(([platform, url]) => {
+              // Skip email since we have "Get In Touch" button
+              if (platform === 'email') {
+                return null;
+              }
+              
+              // Handle other social links normally
+              return (
+                <motion.a
+                  key={platform}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors duration-200 capitalize"
+                >
+                  {platform}
+                </motion.a>
+              );
+            })}
           </motion.div>
 
           {/* Scroll Indicator */}

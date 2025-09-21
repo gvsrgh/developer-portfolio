@@ -4,213 +4,39 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, Github, Calendar, Filter, Search } from 'lucide-react';
 import Container from '../Container';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  category: string;
-  technologies: string[];
-  features: string[];
-  challenges: string[];
-  duration: string;
-  status: 'completed' | 'in-progress';
-  demoLink?: string;
-  codeLink?: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 'networking-security',
-    title: 'Networking Security Projects',
-    description: 'Repository of various networking projects covering networking concepts to strengthen skills in computer networking and security.',
-    longDescription: 'A comprehensive collection of networking and security projects designed to explore and demonstrate various networking concepts, protocols, and security measures. This repository serves as both a learning resource and a practical demonstration of networking skills.',
-    image: '/projects/networking-security.jpg',
-    category: 'networking',
-    technologies: ['Computer Networking', 'Network Security', 'Protocol Analysis', 'Wireshark', 'Linux'],
-    features: [
-      'Network topology design and implementation',
-      'Security protocol analysis and testing',
-      'Network monitoring and troubleshooting tools',
-      'Practical networking scenarios and solutions'
-    ],
-    challenges: [
-      'Understanding complex networking protocols',
-      'Implementing security measures effectively',
-      'Creating comprehensive documentation',
-      'Testing in various network environments'
-    ],
-    duration: 'June 2025 - Present',
-    status: 'in-progress',
-    codeLink: 'https://github.com/gvsrgh/Networking-to-Security'
-  },
-  {
-    id: 'pvpsit-events',
-    title: 'PVPSIT Events Platform',
-    description: 'Full-stack College Events Web App using React, Node.js, Express, and MongoDB for event management and discovery.',
-    longDescription: 'A comprehensive event management platform built specifically for college campuses. The platform streamlines event creation, management, and discovery while providing secure role-based access control and real-time features for enhanced campus engagement.',
-    image: '/projects/pvpsit-events.jpg',
-    category: 'web',
-    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Multer', 'Session Management'],
-    features: [
-      'User authentication with role-based access control',
-      'Event creation and management dashboard',
-      'Real-time event discovery and registration',
-      'Media upload and management system',
-      'Responsive design for all devices',
-      'Email notifications and reminders'
-    ],
-    challenges: [
-      'Implementing secure authentication system',
-      'Managing file uploads and storage',
-      'Creating responsive UI/UX design',
-      'Handling real-time data synchronization'
-    ],
-    duration: 'January 2025 - April 2025',
-    status: 'completed',
-    demoLink: 'https://pvpsit-events.vercel.app/',
-    codeLink: 'https://github.com/gvsrgh/PVPSIT-Events-Page'
-  },
-  {
-    id: 'sentiment-analysis',
-    title: 'Amazon Reviews Sentiment Analysis',
-    description: 'Machine learning project for classifying Amazon product reviews into Positive, Neutral, and Negative sentiments.',
-    longDescription: 'A comprehensive machine learning project that analyzes Amazon product reviews to determine sentiment classification. The project explores various ML algorithms and techniques to achieve optimal accuracy in sentiment prediction.',
-    image: '/projects/sentiment-analysis.jpg',
-    category: 'ml',
-    technologies: ['Machine Learning', 'Python', 'Data Analysis', 'Data Preparation', 'Scikit-learn', 'Pandas', 'Matplotlib'],
-    features: [
-      'Automated sentiment classification system',
-      'Multiple ML algorithm comparison',
-      'Data preprocessing and cleaning pipeline',
-      'Visualization of sentiment trends',
-      'Model performance evaluation metrics'
-    ],
-    challenges: [
-      'Handling large datasets efficiently',
-      'Feature engineering for text data',
-      'Model selection and optimization',
-      'Dealing with imbalanced datasets'
-    ],
-    duration: 'January 2025 - March 2025',
-    status: 'completed',
-    codeLink: 'https://github.com/gvsrgh/Amazon-Reviews-Sentiment-Analysis'
-  },
-  {
-    id: 'evercare-health',
-    title: 'EverCare Health Management',
-    description: 'Mobile application for elderly health monitoring with medication notifications and family tracking capabilities.',
-    longDescription: 'A comprehensive mobile health management application designed specifically for elderly users. The app provides health monitoring, medication reminders, and family connectivity features to ensure better healthcare management for senior citizens.',
-    image: '/projects/evercare-health.jpg',
-    category: 'mobile',
-    technologies: ['Java', 'Android Studio', 'Object-Oriented Programming', 'Mobile Development', 'SQLite'],
-    features: [
-      'Health metrics tracking and monitoring',
-      'Medication reminder notifications',
-      'Family member connectivity and updates',
-      'User-friendly interface for elderly users',
-      'Emergency contact system',
-      'Health report generation'
-    ],
-    challenges: [
-      'Designing accessible UI for elderly users',
-      'Implementing reliable notification system',
-      'Ensuring data privacy and security',
-      'Optimizing battery usage for long-term monitoring'
-    ],
-    duration: 'January 2025 - March 2025',
-    status: 'completed',
-    codeLink: 'https://github.com/gvsrgh/EverCare-App'
-  },
-  {
-    id: 'portfolio-website',
-    title: 'Portfolio Website Development',
-    description: 'Responsive Personal Portfolio Website showcasing projects, skills, and achievements with clean UI.',
-    longDescription: 'A professional portfolio website built to showcase technical projects, skills, and achievements. Features responsive design, smooth navigation, and modern UI/UX principles to create an impressive online presence.',
-    image: '/projects/portfolio-website.jpg',
-    category: 'web',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'Bootstrap', 'GitHub Pages'],
-    features: [
-      'Responsive design for all devices',
-      'Interactive project showcase',
-      'Skills and achievements section',
-      'Contact form integration',
-      'Smooth animations and transitions',
-      'SEO optimized structure'
-    ],
-    challenges: [
-      'Creating responsive layouts',
-      'Optimizing loading performance',
-      'Implementing smooth animations',
-      'Cross-browser compatibility testing'
-    ],
-    duration: 'June 2024 - November 2024',
-    status: 'completed',
-    codeLink: 'https://github.com/gvsrgh/My-Personal-Website',
-    demoLink: 'https://gvsrgh.github.io/My-Personal-Website/'
-  },
-  {
-    id: 'system-programming',
-    title: 'System Programming Projects',
-    description: 'Various programming projects including Advanced Attendance Calculator and interactive games using C++ and Java.',
-    longDescription: 'A collection of system programming projects demonstrating proficiency in low-level programming concepts, object-oriented programming, and algorithm implementation using C++ and Java.',
-    image: '/projects/system-programming.jpg',
-    category: 'programming',
-    technologies: ['C++', 'Java', 'Object-Oriented Programming', 'Data Structures', 'Algorithms'],
-    features: [
-      'Advanced Attendance Calculator with OOP concepts',
-      'Interactive Guess Game with multiple modes',
-      'Efficient algorithm implementations',
-      'Clean code architecture and documentation',
-      'Error handling and input validation'
-    ],
-    challenges: [
-      'Implementing complex OOP concepts',
-      'Optimizing algorithm performance',
-      'Memory management in C++',
-      'Creating user-friendly console interfaces'
-    ],
-    duration: 'June 2024 - Present',
-    status: 'in-progress',
-    codeLink: 'https://github.com/gvsrgh?tab=repositories'
-  },
-  {
-    id: 'liver-function-analysis',
-    title: 'Liver Function Analysis',
-    description: 'Machine Learning system for predicting liver disease based on medical attributes using Python.',
-    longDescription: 'A medical data analysis project that uses machine learning to predict liver disease based on various medical attributes. The project involves comprehensive data preprocessing, model training, and visualization of medical insights.',
-    image: '/projects/liver-analysis.jpg',
-    category: 'ml',
-    technologies: ['Python', 'Machine Learning', 'Pandas', 'Scikit-learn', 'Matplotlib', 'Data Analysis'],
-    features: [
-      'Predictive model for liver disease diagnosis',
-      'Comprehensive data preprocessing pipeline',
-      'Statistical analysis of medical data',
-      'Interactive data visualizations',
-      'Model accuracy evaluation and validation'
-    ],
-    challenges: [
-      'Working with sensitive medical data',
-      'Ensuring model accuracy and reliability',
-      'Handling missing and noisy data',
-      'Creating meaningful visualizations'
-    ],
-    duration: 'August 2023 - December 2023',
-    status: 'completed',
-    codeLink: 'https://github.com/gvsrgh/Liver-Function-Analysis-Using-Python'
-  }
-];
+import { projects } from '@/data/projects';
+import { Project } from '@/lib/types';
 
 const categories = [
   { value: 'all', label: 'All Projects' },
   { value: 'web', label: 'Web Development' },
-  { value: 'ml', label: 'Machine Learning' },
   { value: 'mobile', label: 'Mobile Apps' },
+  { value: 'ml', label: 'Machine Learning' },
   { value: 'networking', label: 'Networking' },
   { value: 'programming', label: 'Programming' }
 ];
+
+const getCategoryFromStack = (stack: string[]): string => {
+  const stackLower = stack.map(s => s.toLowerCase());
+  
+  if (stackLower.some(s => s.includes('react') || s.includes('node') || s.includes('express') || s.includes('html') || s.includes('css'))) {
+    return 'web';
+  }
+  if (stackLower.some(s => s.includes('android') || s.includes('mobile') || s.includes('java'))) {
+    return 'mobile';
+  }
+  if (stackLower.some(s => s.includes('machine learning') || s.includes('python') || s.includes('pandas') || s.includes('scikit'))) {
+    return 'ml';
+  }
+  if (stackLower.some(s => s.includes('networking') || s.includes('security') || s.includes('wireshark'))) {
+    return 'networking';
+  }
+  if (stackLower.some(s => s.includes('c++') || s.includes('algorithms') || s.includes('data structures'))) {
+    return 'programming';
+  }
+  
+  return 'programming';
+};
 
 export default function ProjectsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -218,10 +44,11 @@ export default function ProjectsShowcase() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = projects.filter(project => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    const projectCategory = getCategoryFromStack(project.stack);
+    const matchesCategory = selectedCategory === 'all' || projectCategory === selectedCategory;
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+                         project.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.stack.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -278,7 +105,7 @@ export default function ProjectsShowcase() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <motion.div
-              key={project.id}
+              key={project.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -293,15 +120,28 @@ export default function ProjectsShowcase() {
                   </h3>
                 </div>
                 {/* Status Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    project.status === 'completed' 
-                      ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                  }`}>
-                    {project.status === 'completed' ? 'Completed' : 'In Progress'}
-                  </span>
-                </div>
+                {project.status && (
+                  <div className="absolute top-4 right-4">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      project.status === 'completed' 
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                        : project.status === 'in-progress'
+                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                    }`}>
+                      {project.status === 'completed' ? 'Completed' : 
+                       project.status === 'in-progress' ? 'In Progress' : 'Planning'}
+                    </span>
+                  </div>
+                )}
+                {/* Featured Badge */}
+                {project.featured && (
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 bg-purple-500/80 text-white rounded-full text-xs font-medium">
+                      Featured
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Project Content */}
@@ -311,9 +151,9 @@ export default function ProjectsShowcase() {
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2">
-                    {project.demoLink && (
+                    {project.links.live && (
                       <a
-                        href={project.demoLink}
+                        href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -323,9 +163,9 @@ export default function ProjectsShowcase() {
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     )}
-                    {project.codeLink && (
+                    {project.links.github && (
                       <a
-                        href={project.codeLink}
+                        href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -339,12 +179,12 @@ export default function ProjectsShowcase() {
                 </div>
 
                 <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                  {project.description}
+                  {project.summary}
                 </p>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                  {project.stack.slice(0, 3).map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
@@ -352,17 +192,17 @@ export default function ProjectsShowcase() {
                       {tech}
                     </span>
                   ))}
-                  {project.technologies.length > 3 && (
+                  {project.stack.length > 3 && (
                     <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
-                      +{project.technologies.length - 3} more
+                      +{project.stack.length - 3} more
                     </span>
                   )}
                 </div>
 
-                {/* Duration */}
+                {/* Year */}
                 <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                   <Calendar className="w-4 h-4 mr-2" />
-                  {project.duration}
+                  {project.year}
                 </div>
               </div>
             </motion.div>
@@ -412,13 +252,13 @@ export default function ProjectsShowcase() {
                     </div>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-6">
-                      {selectedProject.longDescription}
+                      {selectedProject.description}
                     </p>
 
                     <div className="flex items-center gap-4 mb-6">
-                      {selectedProject.demoLink && (
+                      {selectedProject.links.live && (
                         <a
-                          href={selectedProject.demoLink}
+                          href={selectedProject.links.live}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
@@ -427,9 +267,9 @@ export default function ProjectsShowcase() {
                           Live Demo
                         </a>
                       )}
-                      {selectedProject.codeLink && (
+                      {selectedProject.links.github && (
                         <a
-                          href={selectedProject.codeLink}
+                          href={selectedProject.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -449,7 +289,7 @@ export default function ProjectsShowcase() {
                         Technologies Used
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {selectedProject.technologies.map((tech, index) => (
+                        {selectedProject.stack.map((tech, index) => (
                           <span
                             key={index}
                             className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
@@ -460,53 +300,48 @@ export default function ProjectsShowcase() {
                       </div>
                     </div>
 
-                    {/* Features */}
+                    {/* Highlights */}
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Key Features
+                        Key Highlights
                       </h4>
                       <ul className="space-y-2">
-                        {selectedProject.features.map((feature, index) => (
+                        {selectedProject.highlights.map((highlight, index) => (
                           <li key={index} className="flex items-start">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                             <span className="text-gray-600 dark:text-gray-300 text-sm">
-                              {feature}
+                              {highlight}
                             </span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* Challenges */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Technical Challenges
-                      </h4>
-                      <ul className="space-y-2">
-                        {selectedProject.challenges.map((challenge, index) => (
-                          <li key={index} className="flex items-start">
-                            <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-gray-600 dark:text-gray-300 text-sm">
-                              {challenge}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Duration and Status */}
+                    {/* Year and Status */}
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center text-gray-500 dark:text-gray-400">
                         <Calendar className="w-4 h-4 mr-2" />
-                        {selectedProject.duration}
+                        {selectedProject.year}
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        selectedProject.status === 'completed' 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                      }`}>
-                        {selectedProject.status === 'completed' ? 'Completed' : 'In Progress'}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {selectedProject.featured && (
+                          <span className="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full text-sm font-medium">
+                            Featured Project
+                          </span>
+                        )}
+                        {selectedProject.status && (
+                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            selectedProject.status === 'completed' 
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                              : selectedProject.status === 'in-progress'
+                              ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                              : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                          }`}>
+                            {selectedProject.status === 'completed' ? 'Completed' : 
+                             selectedProject.status === 'in-progress' ? 'In Progress' : 'Planning'}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

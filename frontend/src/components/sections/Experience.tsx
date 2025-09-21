@@ -125,7 +125,7 @@ export default function Experience() {
               View My Projects
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center px-6 py-3 border-2 border-purple-500 text-purple-500 rounded-lg font-medium hover:bg-purple-500 hover:text-white transition-colors"
             >
               Get In Touch

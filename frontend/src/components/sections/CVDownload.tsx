@@ -54,7 +54,7 @@ export default function CVDownload() {
               </Button>
               
               <Button
-                href={`mailto:${siteConfig.author.email}`}
+                href="/contact"
                 variant="outline"
                 size="lg"
                 className="inline-flex items-center"
@@ -74,7 +74,7 @@ export default function CVDownload() {
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <Mail className="w-4 h-4 mr-2" />
                   <a 
-                    href={`mailto:${siteConfig.author.email}`}
+                    href="/contact"
                     className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {siteConfig.author.email}

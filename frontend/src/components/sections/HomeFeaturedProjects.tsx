@@ -4,38 +4,11 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import Container from '../Container';
 import Button from '../Button';
-
-const featuredProjects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    github: "https://github.com/gvsrgh/ecommerce-platform",
-    demo: "https://demo.example.com",
-    image: "/projects/ecommerce.jpg"
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
-    github: "https://github.com/gvsrgh/task-manager",
-    demo: "https://task-manager.example.com",
-    image: "/projects/task-manager.jpg"
-  },
-  {
-    id: 3,
-    title: "Machine Learning Dashboard",
-    description: "Interactive dashboard for data visualization and machine learning model deployment with Python and Flask backend.",
-    technologies: ["Python", "Flask", "TensorFlow", "React"],
-    github: "https://github.com/gvsrgh/ml-dashboard",
-    demo: "https://ml-dashboard.example.com",
-    image: "/projects/ml-dashboard.jpg"
-  }
-];
+import { getFeaturedProjects } from '@/data/projects';
 
 export default function HomeFeaturedProjects() {
+  const featuredProjects = getFeaturedProjects();
+
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <Container>
@@ -60,7 +33,7 @@ export default function HomeFeaturedProjects() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {featuredProjects.map((project, index) => (
               <motion.div
-                key={project.id}
+                key={project.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -71,7 +44,7 @@ export default function HomeFeaturedProjects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <div className="flex space-x-2">
-                      {project.technologies.slice(0, 3).map((tech) => (
+                      {project.stack.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
                           className="px-2 py-1 bg-white/90 dark:bg-gray-800/90 text-xs font-medium rounded-full text-gray-700 dark:text-gray-300"
@@ -81,6 +54,12 @@ export default function HomeFeaturedProjects() {
                       ))}
                     </div>
                   </div>
+                  {/* Year Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="px-2 py-1 bg-blue-500/80 text-white rounded-full text-xs font-medium">
+                      {project.year}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Project Content */}
@@ -89,30 +68,34 @@ export default function HomeFeaturedProjects() {
                     {project.title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
-                    {project.description}
+                    {project.summary}
                   </p>
 
                   {/* Project Links */}
                   <div className="flex items-center justify-between">
                     <div className="flex space-x-3">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                        title="View Code"
-                      >
-                        <Github size={18} />
-                      </a>
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                        title="Live Demo"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
+                      {project.links.github && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                          title="View Code"
+                        >
+                          <Github size={18} />
+                        </a>
+                      )}
+                      {project.links.live && (
+                        <a
+                          href={project.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                          title="Live Demo"
+                        >
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
