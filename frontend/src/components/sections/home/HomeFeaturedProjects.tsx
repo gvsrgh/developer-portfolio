@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github, X, Calendar } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from '../../Container';
 import Button from '../../Button';
 import { getFeaturedProjects } from '@/data/projects';
@@ -13,6 +13,22 @@ export default function HomeFeaturedProjects() {
   const featuredProjects = getFeaturedProjects();
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Handle ESC key to close modals
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        if (zoomedImage) {
+          setZoomedImage(null);
+        } else if (selectedProject) {
+          setSelectedProject(null);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [zoomedImage, selectedProject]);
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -29,7 +45,7 @@ export default function HomeFeaturedProjects() {
               Featured Projects
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Here are some of my recent projects that showcase my skills in web development, 
+              Here are some of my recent projects that showcase my skills in web development,
               mobile apps, and machine learning.
             </p>
           </motion.div>
@@ -50,27 +66,28 @@ export default function HomeFeaturedProjects() {
                   transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.4))';
+                  (e.currentTarget as HTMLDivElement).style.filter =
+                    'drop-shadow(0 0 20px rgba(59, 130, 246, 0.4))';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  (e.currentTarget as HTMLDivElement).style.filter = 'drop-shadow(0 0 0 transparent)';
                 }}
               >
                 {/* Project Image */}
-                <div 
-                  className="h-48 relative overflow-hidden"
-                >
+                <div className="h-48 relative overflow-hidden">
                   {project.cover ? (
                     <>
                       <Image
                         src={project.cover}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover z-0 transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/40 transition-all duration-300" />
+                      {/* Soft bottom gradient for readability */}
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/40 transition-all duration-300" />
                       {/* View Details Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="bg-black/50 text-white px-3 py-1 rounded-lg text-sm backdrop-blur-sm">
                           Click for details
                         </div>
@@ -78,13 +95,12 @@ export default function HomeFeaturedProjects() {
                     </>
                   ) : (
                     <div className="h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300">
-                      <h3 className="text-white font-bold text-lg text-center px-4">
-                        {project.title}
-                      </h3>
+                      <h3 className="text-white font-bold text-lg text-center px-4">{project.title}</h3>
                     </div>
                   )}
-                  
-                  <div className="absolute bottom-4 left-4 right-4">
+
+                  {/* Tech badges */}
+                  <div className="absolute bottom-4 left-4 right-4 z-30">
                     <div className="flex space-x-2">
                       {project.stack.slice(0, 3).map((tech) => (
                         <span
@@ -96,12 +112,6 @@ export default function HomeFeaturedProjects() {
                       ))}
                     </div>
                   </div>
-                  {/* Year Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="px-2 py-1 bg-blue-500/80 text-white rounded-full text-xs font-medium backdrop-blur-sm">
-                      {project.year}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Project Content */}
@@ -109,9 +119,7 @@ export default function HomeFeaturedProjects() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
-                    {project.summary}
-                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">{project.summary}</p>
 
                   {/* Project Links */}
                   <div className="flex items-center justify-between">
@@ -164,21 +172,28 @@ export default function HomeFeaturedProjects() {
 
       {/* Project Detail Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+          onClick={() => setSelectedProject(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+            tabIndex={-1}
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {selectedProject.title}
-                </h2>
+                <h2 id="modal-title" className="text-3xl font-bold text-gray-900 dark:text-white">{selectedProject.title}</h2>
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+                  aria-label="Close modal"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -187,38 +202,37 @@ export default function HomeFeaturedProjects() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div>
-                  <div 
+                  <div
                     className="relative h-64 rounded-lg mb-6 cursor-pointer group overflow-hidden"
                     onClick={() => setZoomedImage(selectedProject.cover || null)}
                   >
                     {selectedProject.cover ? (
-                      <Image
-                        src={selectedProject.cover}
-                        alt={selectedProject.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+                      <>
+                        <Image
+                          src={selectedProject.cover}
+                          alt={selectedProject.title}
+                          fill
+                          className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        <div
+                          className="pointer-events-none absolute inset-0 z-10
+                                     bg-black/0 group-hover:bg-black/20
+                                     transition-opacity duration-300 flex items-center justify-center"
+                        >
+                          <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Click to Zoom
+                          </span>
+                        </div>
+                      </>
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300">
-                        <h3 className="text-white font-bold text-xl text-center px-4">
-                          {selectedProject.title}
-                        </h3>
-                      </div>
-                    )}
-                    
-                    {selectedProject.cover && (
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                        <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          Click to Zoom
-                        </span>
+                        <h3 className="text-white font-bold text-xl text-center px-4">{selectedProject.title}</h3>
                       </div>
                     )}
                   </div>
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    {selectedProject.description}
-                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">{selectedProject.description}</p>
 
                   <div className="flex items-center gap-4 mb-6">
                     {selectedProject.links?.live && (
@@ -250,9 +264,7 @@ export default function HomeFeaturedProjects() {
                 <div>
                   {/* Technologies */}
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                      Technologies Used
-                    </h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Technologies Used</h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.stack.map((tech, index) => (
                         <span
@@ -267,16 +279,12 @@ export default function HomeFeaturedProjects() {
 
                   {/* Features */}
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                      Key Features
-                    </h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Key Features</h4>
                     <ul className="space-y-2">
                       {selectedProject.highlights.map((feature, index) => (
                         <li key={index} className="flex items-start">
                           <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          <span className="text-gray-600 dark:text-gray-300 text-sm">
-                            {feature}
-                          </span>
+                          <span className="text-gray-600 dark:text-gray-300 text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -286,16 +294,25 @@ export default function HomeFeaturedProjects() {
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center text-gray-500 dark:text-gray-400">
                       <Calendar className="w-4 h-4 mr-2" />
-                      {selectedProject.year}
+                      {selectedProject.duration || selectedProject.year}
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      selectedProject.status === 'completed' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                    }`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        selectedProject.status === 'completed'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                      }`}
+                    >
                       {selectedProject.status === 'completed' ? 'Completed' : 'In Progress'}
                     </span>
                   </div>
+                </div>
+                
+                {/* ESC hint */}
+                <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+                    Press <kbd className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded">ESC</kbd> or click outside to close
+                  </p>
                 </div>
               </div>
             </div>
@@ -305,25 +322,48 @@ export default function HomeFeaturedProjects() {
 
       {/* Image Zoom Modal */}
       {zoomedImage && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div 
+          className="fixed inset-0 bg-black/90 flex items-center justify-center p-8 z-50"
+          onClick={() => setZoomedImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Zoomed project image"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="relative max-w-4xl max-h-[90vh] w-full h-full"
+            className="relative w-[80vw] h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+            tabIndex={-1}
           >
-            <Image
-              src={zoomedImage}
-              alt="Zoomed project image"
-              fill
-              className="object-contain"
-            />
+            {/* Close button positioned at top-right of image */}
             <button
               onClick={() => setZoomedImage(null)}
-              className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors backdrop-blur-sm"
+              className="absolute -top-4 -right-4 z-10 text-white bg-black/70 hover:bg-black/90 rounded-full p-3 transition-all duration-200 shadow-lg border-2 border-white/20"
+              aria-label="Close image"
             >
-              <X size={24} />
+              <X className="w-6 h-6" />
             </button>
+            
+            {/* Image container */}
+            <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl">
+              <Image 
+                src={zoomedImage} 
+                alt="Zoomed project image" 
+                fill 
+                className="object-contain" 
+                sizes="80vw"
+                priority
+              />
+            </div>
+            
+            {/* ESC hint */}
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+              <span className="text-white/70 text-sm bg-black/50 px-3 py-1 rounded-full">
+                Press ESC or click outside to close
+              </span>
+            </div>
           </motion.div>
         </div>
       )}

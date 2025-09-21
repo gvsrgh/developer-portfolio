@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ExternalLink, Github, Calendar, Filter, Search, X } from 'lucide-react';
 import Image from 'next/image';
 import Container from '../../Container';
@@ -14,13 +14,17 @@ const categories = [
   { value: 'mobile', label: 'Mobile Apps' },
   { value: 'ml', label: 'Machine Learning' },
   { value: 'networking', label: 'Networking' },
-  { value: 'programming', label: 'Programming' }
+  { value: 'programming', label: 'Programming' },
+  { value: 'ai', label: 'AI/NLP' }
 ];
 
 const getCategoryFromStack = (stack: string[]): string => {
   const stackLower = stack.map(s => s.toLowerCase());
-  
-  if (stackLower.some(s => s.includes('react') || s.includes('node') || s.includes('express') || s.includes('html') || s.includes('css'))) {
+
+  if (stackLower.some(s => s.includes('nlp') || s.includes('natural language') || s.includes('chatbot') || s.includes('tensorflow'))) {
+    return 'ai';
+  }
+  if (stackLower.some(s => s.includes('react') || s.includes('node') || s.includes('express') || s.includes('html') || s.includes('css') || s.includes('full-stack'))) {
     return 'web';
   }
   if (stackLower.some(s => s.includes('android') || s.includes('mobile') || s.includes('java'))) {
@@ -32,22 +36,23 @@ const getCategoryFromStack = (stack: string[]): string => {
   if (stackLower.some(s => s.includes('networking') || s.includes('security') || s.includes('wireshark'))) {
     return 'networking';
   }
-  if (stackLower.some(s => s.includes('c++') || s.includes('algorithms') || s.includes('data structures'))) {
+  if (stackLower.some(s => s.includes('c++') || s.includes('algorithms') || s.includes('data structures') || s.includes('c (programming'))) {
     return 'programming';
   }
-  
+
   return 'programming';
 };
 
 const getCategoryGradient = (category: string): string => {
   const gradients = {
     web: 'from-blue-400 to-purple-500',
-    mobile: 'from-green-400 to-teal-500', 
+    mobile: 'from-green-400 to-teal-500',
     ml: 'from-purple-400 to-pink-500',
     networking: 'from-orange-400 to-red-500',
-    programming: 'from-indigo-400 to-blue-500'
+    programming: 'from-indigo-400 to-blue-500',
+    ai: 'from-cyan-400 to-blue-600'
   };
-  
+
   return gradients[category as keyof typeof gradients] || gradients.programming;
 };
 
@@ -57,12 +62,29 @@ export default function ProjectsShowcase() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
+  // Handle ESC key to close modals
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        if (zoomedImage) {
+          setZoomedImage(null);
+        } else if (selectedProject) {
+          setSelectedProject(null);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [zoomedImage, selectedProject]);
+
   const filteredProjects = projects.filter(project => {
     const projectCategory = getCategoryFromStack(project.stack);
     const matchesCategory = selectedCategory === 'all' || projectCategory === selectedCategory;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.stack.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.stack.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -82,12 +104,12 @@ export default function ProjectsShowcase() {
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
             A comprehensive showcase of my development journey and technical expertise
           </p>
-          
+
           {/* Search and Filter */}
           <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
             {/* Search */}
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search projects..."
@@ -96,10 +118,10 @@ export default function ProjectsShowcase() {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
             </div>
-            
+
             {/* Filter */}
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -126,9 +148,7 @@ export default function ProjectsShowcase() {
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
               onClick={() => setSelectedProject(project)}
-              style={{
-                filter: 'drop-shadow(0 0 0 transparent)',
-              }}
+              style={{ filter: 'drop-shadow(0 0 0 transparent)' }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))';
               }}
@@ -144,50 +164,53 @@ export default function ProjectsShowcase() {
                       src={project.cover}
                       alt={project.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
+                    {/* Hover overlay for images */}
+                    <div
+                      className="pointer-events-none absolute inset-0 z-10
+                                 bg-black/0 group-hover:bg-black/20
+                                 transition-opacity duration-300 flex items-center justify-center"
+                    >
+                      <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        View Details
+                      </span>
+                    </div>
                   </div>
                 ) : (
-                  <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(getCategoryFromStack(project.stack))} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}>
+                  <div
+                    className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
+                      getCategoryFromStack(project.stack)
+                    )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
+                  >
                     <div className="text-center px-4">
-                      <h3 className="text-white font-bold text-lg mb-2">
-                        {project.title}
-                      </h3>
+                      <h3 className="text-white font-bold text-lg mb-2">{project.title}</h3>
                       <p className="text-white/80 text-sm">
                         {getCategoryFromStack(project.stack).toUpperCase()}
                       </p>
                     </div>
                   </div>
                 )}
-                
+
                 {/* Status Badge */}
                 <div className="absolute top-4 right-4">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    project.status === 'completed' 
-                      ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      project.status === 'completed'
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                    }`}
+                  >
                     {project.status === 'completed' ? 'Completed' : 'In Progress'}
                   </span>
                 </div>
-
-                {/* Hover overlay for images */}
-                {project.cover && (
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      View Details
-                    </span>
-                  </div>
-                )}
               </div>
 
               {/* Project Content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    {project.title}
-                  </h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
                   <div className="flex items-center gap-2">
                     {project.links?.live && (
                       <a
@@ -216,9 +239,7 @@ export default function ProjectsShowcase() {
                   </div>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                  {project.summary}
-                </p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{project.summary}</p>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -240,7 +261,7 @@ export default function ProjectsShowcase() {
                 {/* Duration */}
                 <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                   <Calendar className="w-4 h-4 mr-2" />
-                  {project.year}
+                  {project.duration || project.year}
                 </div>
               </div>
             </motion.div>
@@ -250,74 +271,82 @@ export default function ProjectsShowcase() {
         {/* No results message */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400 text-lg">
-              No projects found matching your criteria.
-            </p>
+            <p className="text-gray-500 dark:text-gray-400 text-lg">No projects found matching your criteria.</p>
           </div>
         )}
 
         {/* Project Detail Modal */}
         {selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div 
+            className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+            onClick={() => setSelectedProject(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {selectedProject.title}
-                  </h2>
+                  <h2 id="modal-title" className="text-3xl font-bold text-gray-900 dark:text-white">{selectedProject.title}</h2>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+                    aria-label="Close modal"
                   >
-                    ✕
+                    <X className="w-6 h-6" />
                   </button>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                   {/* Left Column */}
                   <div>
-                    <div 
+                    <div
                       className="relative h-64 rounded-lg mb-6 cursor-pointer group overflow-hidden"
                       onClick={() => setZoomedImage(selectedProject.cover || null)}
                     >
                       {selectedProject.cover ? (
-                        <Image
-                          src={selectedProject.cover}
-                          alt={selectedProject.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
+                        <>
+                          <Image
+                            src={selectedProject.cover}
+                            alt={selectedProject.title}
+                            fill
+                            className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                          <div
+                            className="pointer-events-none absolute inset-0 z-10
+                                       bg-black/0 group-hover:bg-black/20
+                                       transition-opacity duration-300 flex items-center justify-center"
+                          >
+                            <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              Click to Zoom
+                            </span>
+                          </div>
+                        </>
                       ) : (
-                        <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(getCategoryFromStack(selectedProject.stack))} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}>
+                        <div
+                          className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
+                            getCategoryFromStack(selectedProject.stack)
+                          )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
+                        >
                           <div className="text-center px-4">
-                            <h3 className="text-white font-bold text-xl mb-2">
-                              {selectedProject.title}
-                            </h3>
+                            <h3 className="text-white font-bold text-xl mb-2">{selectedProject.title}</h3>
                             <p className="text-white/80">
                               {getCategoryFromStack(selectedProject.stack).toUpperCase()}
                             </p>
                           </div>
                         </div>
                       )}
-                      
-                      {selectedProject.cover && (
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                          <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            Click to Zoom
-                          </span>
-                        </div>
-                      )}
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                      {selectedProject.description}
-                    </p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">{selectedProject.description}</p>
 
                     <div className="flex items-center gap-4 mb-6">
                       {selectedProject.links?.live && (
@@ -349,9 +378,7 @@ export default function ProjectsShowcase() {
                   <div>
                     {/* Technologies */}
                     <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Technologies Used
-                      </h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Technologies Used</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.stack.map((tech, index) => (
                           <span
@@ -366,16 +393,12 @@ export default function ProjectsShowcase() {
 
                     {/* Features */}
                     <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Key Features
-                      </h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Key Features</h4>
                       <ul className="space-y-2">
                         {selectedProject.highlights.map((feature, index) => (
                           <li key={index} className="flex items-start">
-                            <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-gray-600 dark:text-gray-300 text-sm">
-                              {feature}
-                            </span>
+                            <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                            <span className="text-gray-600 dark:text-gray-300 text-sm">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -385,17 +408,26 @@ export default function ProjectsShowcase() {
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center text-gray-500 dark:text-gray-400">
                         <Calendar className="w-4 h-4 mr-2" />
-                        {selectedProject.year}
+                        {selectedProject.duration || selectedProject.year}
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        selectedProject.status === 'completed' 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          selectedProject.status === 'completed'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                        }`}
+                      >
                         {selectedProject.status === 'completed' ? 'Completed' : 'In Progress'}
                       </span>
                     </div>
                   </div>
+                </div>
+                
+                {/* ESC hint */}
+                <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+                    Press <kbd className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded">ESC</kbd> or click outside to close
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -404,27 +436,47 @@ export default function ProjectsShowcase() {
 
         {/* Image Zoom Modal */}
         {zoomedImage && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50">
+          <div 
+            className="fixed inset-0 bg-black/90 flex items-center justify-center p-8 z-50"
+            onClick={() => setZoomedImage(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Zoomed project image"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="relative max-w-4xl max-h-[90vh] w-full h-full"
+              className="relative w-[80vw] h-[80vh]"
+              onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
             >
+              {/* Close button positioned at top-right of image */}
               <button
                 onClick={() => setZoomedImage(null)}
-                className="absolute top-4 right-4 z-10 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70 transition-all"
+                className="absolute -top-4 -right-4 z-10 text-white bg-black/70 hover:bg-black/90 rounded-full p-3 transition-all duration-200 shadow-lg border-2 border-white/20"
+                aria-label="Close image"
               >
                 <X className="w-6 h-6" />
               </button>
-              <div className="relative w-full h-full">
-                <Image
-                  src={zoomedImage}
-                  alt="Zoomed project image"
-                  fill
-                  className="object-contain"
-                  sizes="90vw"
+              
+              {/* Image container */}
+              <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl">
+                <Image 
+                  src={zoomedImage} 
+                  alt="Zoomed project image" 
+                  fill 
+                  className="object-contain" 
+                  sizes="80vw"
+                  priority
                 />
+              </div>
+              
+              {/* ESC hint */}
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+                <span className="text-white/70 text-sm bg-black/50 px-3 py-1 rounded-full">
+                  Press ESC or click outside to close
+                </span>
               </div>
             </motion.div>
           </div>

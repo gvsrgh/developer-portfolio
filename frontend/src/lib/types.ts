@@ -5,6 +5,7 @@ export interface Project {
   summary: string;
   description: string;
   year: string;
+  duration?: string;
   stack: string[];
   links: {
     live?: string;
