@@ -245,7 +245,17 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                     background: platform.color ? `linear-gradient(135deg, ${platform.color}dd, ${platform.color}aa)` : 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                    e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.5))';
+                    // Use white glow for GitHub, platform color for others
+                    if (platform.id === 'github') {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))';
+                    } else {
+                      const hexColor = platform.color || '#3b82f6';
+                      // Convert hex to RGB for the glow effect
+                      const r = parseInt(hexColor.slice(1, 3), 16);
+                      const g = parseInt(hexColor.slice(3, 5), 16);
+                      const b = parseInt(hexColor.slice(5, 7), 16);
+                      e.currentTarget.style.filter = `drop-shadow(0 0 30px rgba(${r}, ${g}, ${b}, 0.9))`;
+                    }
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -308,7 +318,17 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(34, 197, 94, 0.6))';
+                  // Use white glow for GitHub, platform color for others
+                  if (platform.id === 'github') {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))';
+                  } else {
+                    const hexColor = platform.color || '#22c55e';
+                    // Convert hex to RGB for the glow effect
+                    const r = parseInt(hexColor.slice(1, 3), 16);
+                    const g = parseInt(hexColor.slice(3, 5), 16);
+                    const b = parseInt(hexColor.slice(5, 7), 16);
+                    e.currentTarget.style.filter = `drop-shadow(0 0 30px rgba(${r}, ${g}, ${b}, 0.9))`;
+                  }
                 }}
                 onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';

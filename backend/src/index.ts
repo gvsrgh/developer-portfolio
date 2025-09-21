@@ -50,6 +50,18 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
 });
 
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'Backend working!', 
+    message: 'Portfolio backend server is running successfully',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/status', (req, res) => {
+  res.send('Backend working! ✅');
+});
+
 app.get('/api/projects', (req, res) => {
   // TODO: Implement project data endpoint
   res.json({ projects: [] });
