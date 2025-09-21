@@ -25,18 +25,48 @@ export default function CVDownload() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          whileHover={{ y: -4 }}
           className="text-center"
         >
-          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+          <div 
+            className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg transition-all duration-500"
+            style={{
+              filter: 'drop-shadow(0 0 0 transparent)',
+            }}
+            onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+              e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(59, 130, 246, 0.3))';
+            }}
+            onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+              e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+            }}
+          >
+            <motion.div 
+              className="flex justify-center mb-6"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div 
+                className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center transition-all duration-300"
+                style={{
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.5))';
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                }}
+              >
                 <FileText className="w-8 h-8 text-white" />
               </div>
-            </div>
+            </motion.div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+            >
               Download My CV
-            </h2>
+            </motion.h2>
             
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
               Get a detailed overview of my education, experience, skills, and projects. 
@@ -44,24 +74,54 @@ export default function CVDownload() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Button
-                onClick={handleDownloadCV}
-                size="lg"
-                className="inline-flex items-center"
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                  transition: 'all 0.3s ease-in-out',
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.4))';
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                }}
               >
-                <Download className="w-5 h-5 mr-2" />
-                Download CV (PDF)
-              </Button>
+                <Button
+                  onClick={handleDownloadCV}
+                  size="lg"
+                  className="inline-flex items-center"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download CV (PDF)
+                </Button>
+              </motion.div>
               
-              <Button
-                href="/contact"
-                variant="outline"
-                size="lg"
-                className="inline-flex items-center"
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                  transition: 'all 0.3s ease-in-out',
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.4))';
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                }}
               >
-                <Mail className="w-5 h-5 mr-2" />
-                Contact Me
-              </Button>
+                <Button
+                  href="/contact"
+                  variant="outline"
+                  size="lg"
+                  className="inline-flex items-center"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Contact Me
+                </Button>
+              </motion.div>
             </div>
 
             {/* Quick contact info */}
@@ -71,7 +131,10 @@ export default function CVDownload() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
-                <div className="flex items-center text-gray-600 dark:text-gray-300">
+                <motion.div 
+                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
+                  whileHover={{ x: 4 }}
+                >
                   <Mail className="w-4 h-4 mr-2" />
                   <a 
                     href="/contact"
@@ -79,40 +142,67 @@ export default function CVDownload() {
                   >
                     {siteConfig.author.email}
                   </a>
-                </div>
+                </motion.div>
                 
                 <div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
                 
-                <div className="flex items-center text-gray-600 dark:text-gray-300">
+                <motion.div 
+                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
+                  whileHover={{ x: 4 }}
+                >
                   <span>📍 {siteConfig.author.location}</span>
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* CV Preview Info */}
-            <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <motion.div 
+              className="mt-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.2))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                 What&apos;s included in my CV:
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600 dark:text-gray-300">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                <motion.div 
+                  className="flex items-center hover:text-green-600 dark:hover:text-green-400 transition-colors duration-300"
+                  whileHover={{ x: 2 }}
+                >
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
                   Education Details
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                  whileHover={{ x: 2 }}
+                >
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
                   Work Experience
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
+                  whileHover={{ x: 2 }}
+                >
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
                   Technical Skills
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-300"
+                  whileHover={{ x: 2 }}
+                >
+                  <div className="w-2 h-2 bg-orange-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
                   Project Portfolio
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

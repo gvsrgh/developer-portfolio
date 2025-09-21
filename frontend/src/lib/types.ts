@@ -11,7 +11,7 @@ export interface Project {
     github?: string;
     demo?: string;
   };
-  cover: string;
+  cover?: string;
   highlights: string[];
   featured?: boolean;
   status?: 'completed' | 'in-progress' | 'planning';

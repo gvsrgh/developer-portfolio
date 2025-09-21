@@ -84,16 +84,36 @@ export default function HomeSkillsOverview() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
                 className="group"
               >
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 h-full hover:shadow-lg transition-all duration-300">
+                <div 
+                  className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 h-full hover:shadow-2xl transition-all duration-500 relative"
+                  style={{
+                    filter: 'drop-shadow(0 0 0 transparent)',
+                    transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+                  }}
+                  onMouseEnter={(e) => {
+                    const colors = {
+                      "from-blue-500 to-cyan-500": "rgba(59, 130, 246, 0.4)",
+                      "from-green-500 to-emerald-500": "rgba(34, 197, 94, 0.4)",
+                      "from-purple-500 to-pink-500": "rgba(147, 51, 234, 0.4)",
+                      "from-orange-500 to-red-500": "rgba(249, 115, 22, 0.4)"
+                    };
+                    const colorKey = category.color as keyof typeof colors;
+                    e.currentTarget.style.filter = `drop-shadow(0 0 20px ${colors[colorKey]})`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  }}
+                >
                   {/* Icon */}
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.color} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     <category.icon className="w-full h-full text-white" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {category.title}
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
@@ -105,7 +125,7 @@ export default function HomeSkillsOverview() {
                     {(expandedCategories.has(category.title) ? category.skills : category.skills.slice(0, 3)).map((skill) => (
                       <span
                         key={skill}
-                        className="px-2 py-1 bg-white dark:bg-gray-600 text-xs font-medium rounded-md text-gray-700 dark:text-gray-200"
+                        className="px-2 py-1 bg-white dark:bg-gray-600 text-xs font-medium rounded-md text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors"
                       >
                         {skill}
                       </span>
@@ -113,7 +133,7 @@ export default function HomeSkillsOverview() {
                     {category.skills.length > 3 && !expandedCategories.has(category.title) && (
                       <button
                         onClick={() => toggleCategory(category.title)}
-                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer"
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer hover:scale-105 transform duration-200"
                       >
                         +{category.skills.length - 3}
                       </button>
@@ -121,7 +141,7 @@ export default function HomeSkillsOverview() {
                     {expandedCategories.has(category.title) && category.skills.length > 3 && (
                       <button
                         onClick={() => toggleCategory(category.title)}
-                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer"
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-500 text-xs font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-400 transition-colors cursor-pointer hover:scale-105 transform duration-200"
                       >
                         Show less
                       </button>
@@ -137,7 +157,17 @@ export default function HomeSkillsOverview() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-2xl p-8 mb-12"
+            className="bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-2xl p-8 mb-12 hover:shadow-xl transition-all duration-500"
+            style={{
+              filter: 'drop-shadow(0 0 0 transparent)',
+              transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+            }}
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
@@ -146,7 +176,8 @@ export default function HomeSkillsOverview() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                  className="text-center"
+                  whileHover={{ scale: 1.05 }}
+                  className="text-center cursor-pointer"
                 >
                   <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">
                     {stat.value}

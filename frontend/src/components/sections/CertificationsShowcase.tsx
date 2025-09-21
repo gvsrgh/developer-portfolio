@@ -250,8 +250,18 @@ export default function CertificationsShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-shadow"
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300"
                   onClick={() => setSelectedCertification(cert)}
+                  style={{
+                    filter: 'drop-shadow(0 0 0 transparent)',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.5))';
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  }}
                 >
                   <div className="flex items-center mb-4">
                     <Star className="w-6 h-6 mr-2" />
@@ -293,8 +303,18 @@ export default function CertificationsShowcase() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedCertification(cert)}
+                style={{
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))';
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                }}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">

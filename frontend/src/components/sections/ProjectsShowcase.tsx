@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ExternalLink, Github, Calendar, Filter, Search } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Filter, Search, X } from 'lucide-react';
+import Image from 'next/image';
 import Container from '../Container';
 import { projects } from '@/data/projects';
 import { Project } from '@/lib/types';
@@ -38,17 +39,30 @@ const getCategoryFromStack = (stack: string[]): string => {
   return 'programming';
 };
 
+const getCategoryGradient = (category: string): string => {
+  const gradients = {
+    web: 'from-blue-400 to-purple-500',
+    mobile: 'from-green-400 to-teal-500', 
+    ml: 'from-purple-400 to-pink-500',
+    networking: 'from-orange-400 to-red-500',
+    programming: 'from-indigo-400 to-blue-500'
+  };
+  
+  return gradients[category as keyof typeof gradients] || gradients.programming;
+};
+
 export default function ProjectsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   const filteredProjects = projects.filter(project => {
     const projectCategory = getCategoryFromStack(project.stack);
     const matchesCategory = selectedCategory === 'all' || projectCategory === selectedCategory;
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          project.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.stack.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+                         project.stack.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -109,36 +123,60 @@ export default function ProjectsShowcase() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+              whileHover={{ y: -4 }}
+              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
               onClick={() => setSelectedProject(project)}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
             >
               {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-purple-400 to-blue-500">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white font-bold text-lg text-center px-4">
-                    {project.title}
-                  </h3>
-                </div>
-                {/* Status Badge */}
-                {project.status && (
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'completed' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                        : project.status === 'in-progress'
-                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-                    }`}>
-                      {project.status === 'completed' ? 'Completed' : 
-                       project.status === 'in-progress' ? 'In Progress' : 'Planning'}
-                    </span>
+              <div className="relative h-48 group">
+                {project.cover ? (
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src={project.cover}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
+                ) : (
+                  <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(getCategoryFromStack(project.stack))} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}>
+                    <div className="text-center px-4">
+                      <h3 className="text-white font-bold text-lg mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-white/80 text-sm">
+                        {getCategoryFromStack(project.stack).toUpperCase()}
+                      </p>
+                    </div>
                   </div>
                 )}
-                {/* Featured Badge */}
-                {project.featured && (
-                  <div className="absolute top-4 left-4">
-                    <span className="px-2 py-1 bg-purple-500/80 text-white rounded-full text-xs font-medium">
-                      Featured
+                
+                {/* Status Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    project.status === 'completed' 
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                  }`}>
+                    {project.status === 'completed' ? 'Completed' : 'In Progress'}
+                  </span>
+                </div>
+
+                {/* Hover overlay for images */}
+                {project.cover && (
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                    <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      View Details
                     </span>
                   </div>
                 )}
@@ -151,7 +189,7 @@ export default function ProjectsShowcase() {
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2">
-                    {project.links.live && (
+                    {project.links?.live && (
                       <a
                         href={project.links.live}
                         target="_blank"
@@ -163,7 +201,7 @@ export default function ProjectsShowcase() {
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     )}
-                    {project.links.github && (
+                    {project.links?.github && (
                       <a
                         href={project.links.github}
                         target="_blank"
@@ -199,7 +237,7 @@ export default function ProjectsShowcase() {
                   )}
                 </div>
 
-                {/* Year */}
+                {/* Duration */}
                 <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
                   <Calendar className="w-4 h-4 mr-2" />
                   {project.year}
@@ -243,12 +281,38 @@ export default function ProjectsShowcase() {
                 <div className="grid md:grid-cols-2 gap-8">
                   {/* Left Column */}
                   <div>
-                    <div className="relative h-64 bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg mb-6">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <h3 className="text-white font-bold text-xl text-center px-4">
-                          {selectedProject.title}
-                        </h3>
-                      </div>
+                    <div 
+                      className="relative h-64 rounded-lg mb-6 cursor-pointer group overflow-hidden"
+                      onClick={() => setZoomedImage(selectedProject.cover || null)}
+                    >
+                      {selectedProject.cover ? (
+                        <Image
+                          src={selectedProject.cover}
+                          alt={selectedProject.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      ) : (
+                        <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(getCategoryFromStack(selectedProject.stack))} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}>
+                          <div className="text-center px-4">
+                            <h3 className="text-white font-bold text-xl mb-2">
+                              {selectedProject.title}
+                            </h3>
+                            <p className="text-white/80">
+                              {getCategoryFromStack(selectedProject.stack).toUpperCase()}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {selectedProject.cover && (
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                          <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Click to Zoom
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -256,7 +320,7 @@ export default function ProjectsShowcase() {
                     </p>
 
                     <div className="flex items-center gap-4 mb-6">
-                      {selectedProject.links.live && (
+                      {selectedProject.links?.live && (
                         <a
                           href={selectedProject.links.live}
                           target="_blank"
@@ -267,7 +331,7 @@ export default function ProjectsShowcase() {
                           Live Demo
                         </a>
                       )}
-                      {selectedProject.links.github && (
+                      {selectedProject.links?.github && (
                         <a
                           href={selectedProject.links.github}
                           target="_blank"
@@ -300,51 +364,67 @@ export default function ProjectsShowcase() {
                       </div>
                     </div>
 
-                    {/* Highlights */}
+                    {/* Features */}
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Key Highlights
+                        Key Features
                       </h4>
                       <ul className="space-y-2">
-                        {selectedProject.highlights.map((highlight, index) => (
+                        {selectedProject.highlights.map((feature, index) => (
                           <li key={index} className="flex items-start">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                             <span className="text-gray-600 dark:text-gray-300 text-sm">
-                              {highlight}
+                              {feature}
                             </span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* Year and Status */}
+                    {/* Duration and Status */}
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center text-gray-500 dark:text-gray-400">
                         <Calendar className="w-4 h-4 mr-2" />
                         {selectedProject.year}
                       </div>
-                      <div className="flex items-center gap-2">
-                        {selectedProject.featured && (
-                          <span className="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full text-sm font-medium">
-                            Featured Project
-                          </span>
-                        )}
-                        {selectedProject.status && (
-                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            selectedProject.status === 'completed' 
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                              : selectedProject.status === 'in-progress'
-                              ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                              : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-                          }`}>
-                            {selectedProject.status === 'completed' ? 'Completed' : 
-                             selectedProject.status === 'in-progress' ? 'In Progress' : 'Planning'}
-                          </span>
-                        )}
-                      </div>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        selectedProject.status === 'completed' 
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                      }`}>
+                        {selectedProject.status === 'completed' ? 'Completed' : 'In Progress'}
+                      </span>
                     </div>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Image Zoom Modal */}
+        {zoomedImage && (
+          <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="relative max-w-4xl max-h-[90vh] w-full h-full"
+            >
+              <button
+                onClick={() => setZoomedImage(null)}
+                className="absolute top-4 right-4 z-10 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70 transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="relative w-full h-full">
+                <Image
+                  src={zoomedImage}
+                  alt="Zoomed project image"
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                />
               </div>
             </motion.div>
           </div>

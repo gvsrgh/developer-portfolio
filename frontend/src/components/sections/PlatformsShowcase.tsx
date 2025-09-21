@@ -264,22 +264,70 @@ export default function PlatformsShowcase() {
 
           {/* Overall Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.3))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-purple-500">{totalStats.platforms}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Active Platforms</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.3))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-green-500">{totalStats.problemsSolved}+</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Problems Solved</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-blue-500">{totalStats.certificates}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Certificates</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
+            </motion.div>
+            <motion.div 
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(249, 115, 22, 0.3))';
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
+            >
               <div className="text-2xl font-bold text-orange-500">{totalStats.languages}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">Languages Used</div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Category Filter */}
@@ -318,8 +366,18 @@ export default function PlatformsShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-shadow`}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300`}
                   onClick={() => setSelectedPlatform(platform)}
+                  style={{
+                    filter: 'drop-shadow(0 0 0 transparent)',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.5))';
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                  }}
                 >
                   <div className="flex items-center mb-4">
                     <span className="text-3xl mr-3">{platform.logo}</span>
@@ -359,8 +417,18 @@ export default function PlatformsShowcase() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                 onClick={() => setSelectedPlatform(platform)}
+                style={{
+                  filter: 'drop-shadow(0 0 0 transparent)',
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.3))';
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                }}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">

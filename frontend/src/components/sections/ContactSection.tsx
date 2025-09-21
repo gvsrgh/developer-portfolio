@@ -133,12 +133,25 @@ export default function ContactSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="flex items-start space-x-4"
+                  whileHover={{ x: 4 }}
+                  className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 -m-4"
                 >
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                    <motion.div 
+                      className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      style={{
+                        filter: 'drop-shadow(0 0 0 transparent)',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.4))';
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                      }}
+                    >
                       <method.icon className="w-6 h-6 text-purple-500" />
-                    </div>
+                    </motion.div>
                   </div>
                   <div className="flex-grow">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
@@ -173,10 +186,20 @@ export default function ContactSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors ${social.color}`}
+                    whileHover={{ scale: 1.1 }}
+                    className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all duration-300 ${social.color}`}
                     title={`${social.label} - ${social.username}`}
+                    style={{
+                      filter: 'drop-shadow(0 0 0 transparent)',
+                    }}
+                    onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.4))';
+                    }}
+                    onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+                    }}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-6 h-6" />
                   </motion.a>
                 ))}
               </div>

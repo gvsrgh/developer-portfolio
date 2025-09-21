@@ -11,7 +11,6 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh/Networking-to-Security',
     },
-    cover: '/projects/networking-security.jpg',
     highlights: [
       'Network topology design and implementation',
       'Security protocol analysis and testing',
@@ -32,7 +31,6 @@ export const projects: Project[] = [
       live: 'https://pvpsit-events.vercel.app/',
       github: 'https://github.com/gvsrgh/PVPSIT-Events-Page',
     },
-    cover: '/projects/pvpsit-events.jpg',
     highlights: [
       'User authentication with role-based access control',
       'Event creation and management dashboard',
@@ -54,7 +52,6 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh/Amazon-Reviews-Sentiment-Analysis',
     },
-    cover: '/projects/sentiment-analysis.jpg',
     highlights: [
       'Automated sentiment classification system',
       'Multiple ML algorithm comparison',
@@ -75,7 +72,6 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh/EverCare-App',
     },
-    cover: '/projects/evercare-health.jpg',
     highlights: [
       'Health metrics tracking and monitoring',
       'Medication reminder notifications',
@@ -97,7 +93,6 @@ export const projects: Project[] = [
       live: 'https://gvsrgh.github.io/My-Personal-Website/',
       github: 'https://github.com/gvsrgh/My-Personal-Website',
     },
-    cover: '/projects/portfolio-website.jpg',
     highlights: [
       'Responsive design for all devices',
       'Interactive project showcase',
@@ -118,7 +113,6 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh?tab=repositories',
     },
-    cover: '/projects/system-programming.jpg',
     highlights: [
       'Advanced Attendance Calculator with OOP concepts',
       'Interactive Guess Game with multiple modes',
@@ -138,7 +132,7 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/gvsrgh/Liver-Function-Analysis-Using-Python',
     },
-    cover: '/projects/liver-analysis.jpg',
+    cover: '/projects/liver-analysis.png',
     highlights: [
       'Predictive model for liver disease diagnosis',
       'Comprehensive data preprocessing pipeline',

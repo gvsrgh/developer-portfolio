@@ -61,7 +61,18 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg p-8 text-white mb-12"
+          whileHover={{ y: -4 }}
+          className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg p-8 text-white mb-12 hover:shadow-2xl transition-all duration-500"
+          style={{
+            filter: 'drop-shadow(0 0 0 transparent)',
+            transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.5))';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+          }}
         >
           <div className="flex items-center mb-4">
             <Briefcase className="w-8 h-8 mr-3" />
@@ -86,17 +97,28 @@ export default function Experience() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md"
+              whileHover={{ y: -6 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-2xl transition-all duration-500 group"
+              style={{
+                filter: 'drop-shadow(0 0 0 transparent)',
+                transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
+              }}
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
-                  <highlight.icon className="w-6 h-6 text-purple-500" />
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-all duration-300">
+                  <highlight.icon className="w-6 h-6 text-purple-500 group-hover:text-purple-600 transition-colors" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                   {highlight.title}
                 </h3>
               </div>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
                 {highlight.description}
               </p>
             </motion.div>
@@ -108,7 +130,8 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8"
+          whileHover={{ y: -4 }}
+          className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8 hover:shadow-xl transition-all duration-500"
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Let&apos;s Build Something Amazing Together
@@ -120,13 +143,13 @@ export default function Experience() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/projects"
-              className="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors hover:scale-105 transform duration-200"
             >
               View My Projects
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center px-6 py-3 border-2 border-purple-500 text-purple-500 rounded-lg font-medium hover:bg-purple-500 hover:text-white transition-colors"
+              className="inline-flex items-center px-6 py-3 border-2 border-purple-500 text-purple-500 rounded-lg font-medium hover:bg-purple-500 hover:text-white transition-colors hover:scale-105 transform duration-200"
             >
               Get In Touch
             </a>
