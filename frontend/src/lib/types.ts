@@ -25,14 +25,22 @@ export interface SkillCategory {
 }
 
 export interface Platform {
+  id: string;
   name: string;
   username: string;
   url: string;
+  description: string;
+  logo?: string;
+  color?: string;
   stats?: {
-    [key: string]: string | number;
+    [key: string]: string | number | null;
   };
-  description?: string;
+  achievements?: string[];
+  languages?: string[];
+  recentActivity?: string;
+  joined?: string;
   featured?: boolean;
+  category: 'competitive' | 'practice' | 'learning' | 'collaboration';
 }
 
 export interface TimelineItem {

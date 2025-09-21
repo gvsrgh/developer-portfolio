@@ -2,29 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ExternalLink, Trophy, Star, TrendingUp, Award, Target, LucideIcon } from 'lucide-react';
-import Container from '../../Container';
-
-interface Platform {
-  id: string;
-  name: string;
-  description: string;
-  url: string;
-  username: string;
-  logo: string;
-  color: string;
-  stats: {
-    label: string;
-    value: string | number;
-    icon: LucideIcon;
-  }[];
-  achievements: string[];
-  languages: string[];
-  recentActivity: string;
-  joined: string;
-  featured: boolean;
-  category: 'competitive' | 'practice' | 'learning' | 'collaboration';
-}
+import { ExternalLink, Trophy, Star, TrendingUp, Award, Target } from 'lucide-react';
+import Container from '../Container';
+import { platforms as platformsData } from '@/data/platforms';
+import { Platform } from '@/lib/types';
+import Image from 'next/image';
 
 interface Category {
   value: string;
@@ -43,218 +25,13 @@ const defaultCategories: Category[] = [
   { value: 'collaboration', label: 'Collaboration & Projects' }
 ];
 
-const platforms: Platform[] = [
-  {
-    id: 'leetcode',
-    name: 'LeetCode',
-    description: 'Practice coding problems and prepare for technical interviews with algorithmic challenges.',
-    url: 'https://leetcode.com/u/gvsrlc/',
-    username: 'gvsrlc',
-    logo: '🟠',
-    color: 'from-orange-400 to-orange-600',
-    stats: [
-      { label: 'Problems Solved', value: 150, icon: Trophy },
-      { label: 'Contest Rating', value: 1450, icon: Star },
-      { label: 'Global Rank', value: '12.5K', icon: TrendingUp }
-    ],
-    achievements: [
-      'Solved 150+ algorithmic problems',
-      'Participated in weekly contests',
-      'Achieved 1450+ contest rating',
-      'Top 15% in problem solving'
-    ],
-    languages: ['Python', 'Java', 'C++', 'JavaScript'],
-    recentActivity: 'Solved 5 problems this week',
-    joined: 'January 2024',
-    featured: true,
-    category: 'competitive'
-  },
-  {
-    id: 'codechef',
-    name: 'CodeChef',
-    description: 'Participate in competitive programming contests and improve algorithmic thinking.',
-    url: 'https://www.codechef.com/users/gvsr',
-    username: 'gvsr',
-    logo: '🍳',
-    color: 'from-amber-400 to-amber-600',
-    stats: [
-      { label: 'Current Rating', value: 1456, icon: Star },
-      { label: 'Institution Rank', value: 33, icon: Award },
-      { label: 'Contests', value: 12, icon: Trophy }
-    ],
-    achievements: [
-      'Div 3 coder (1456 rating)',
-      'Rank 33 at institution',
-      'Participated in 12+ contests',
-      'Solved 85+ competitive problems',
-      'Regular contest participation'
-    ],
-    languages: ['C++', 'Python', 'Java'],
-    recentActivity: 'Participated in long challenge',
-    joined: 'June 2023',
-    featured: true,
-    category: 'competitive'
-  },
-  {
-    id: 'codeforces',
-    name: 'Codeforces',
-    description: 'Enhance competitive programming skills through regular contests and practice.',
-    url: 'https://codeforces.com/profile/gvsr',
-    username: 'gvsr',
-    logo: '�',
-    color: 'from-red-400 to-red-600',
-    stats: [
-      { label: 'Contest Rating', value: 1562, icon: Star },
-      { label: 'Global Rank', value: '20415', icon: TrendingUp },
-      { label: 'Contests', value: 80, icon: Trophy }
-    ],
-    achievements: [
-      'Specialist rank achieved',
-      'Contest rating of 1562',
-      'Global rank 20415',
-      'Participated in 80+ rated contests',
-      'Solved 300+ problems'
-    ],
-    languages: ['C++', 'Python'],
-    recentActivity: 'Solved Div 2 problems',
-    joined: 'September 2023',
-    featured: true,
-    category: 'competitive'
-  },
-  {
-    id: 'takeuforward',
-    name: 'TakeUForward',
-    description: 'DSA learning and problem solving platform with structured courses.',
-    url: 'https://takeuforward.org/plus/profile/ram25',
-    username: 'ram25',
-    logo: '🚀',
-    color: 'from-green-400 to-green-600',
-    stats: [
-      { label: 'DSA Progress', value: '65/1006', icon: Target },
-      { label: 'Current Streak', value: 7, icon: TrendingUp },
-      { label: 'Active Days', value: 29, icon: Star }
-    ],
-    achievements: [
-      '65 DSA problems solved',
-      '7-day current streak',
-      '29 active days this year',
-      'Consistent learning progress',
-      'Structured problem solving approach'
-    ],
-    languages: ['C++', 'Java', 'Python'],
-    recentActivity: 'Solved array problems',
-    joined: 'February 2025',
-    featured: true,
-    category: 'learning'
-  },
-  {
-    id: 'hackerrank',
-    name: 'HackerRank',
-    description: 'Develop programming skills through challenges and earn certificates in various domains.',
-    url: 'https://www.hackerrank.com/profile/gvsrhr',
-    username: 'gvsrhr',
-    logo: '�',
-    color: 'from-green-400 to-green-600',
-    stats: [
-      { label: 'Certificates', value: 8, icon: Award },
-      { label: 'Star Rating', value: '5⭐', icon: Star },
-      { label: 'Domain Score', value: '850+', icon: Target }
-    ],
-    achievements: [
-      'Python (Basic) Certificate',
-      'SQL (Intermediate) Certificate', 
-      'Java (Basic) Certificate',
-      'Problem Solving (Basic) Certificate',
-      '5-star rating in Python',
-      '4-star rating in Java',
-      'Active in 30 Days of Code challenge'
-    ],
-    languages: ['Python', 'Java', 'SQL', 'C'],
-    recentActivity: 'Earned SQL certificate',
-    joined: 'March 2023',
-    featured: false,
-    category: 'practice'
-  },
-  {
-    id: 'coding-ninjas',
-    name: 'Coding Ninjas',
-    description: 'Comprehensive coding practice and interview preparation platform.',
-    url: 'https://www.naukri.com/code360/profile/gvsr',
-    username: 'gvsr',
-    logo: '🥷',
-    color: 'from-purple-400 to-purple-600',
-    stats: [
-      { label: 'Problems Solved', value: 1048, icon: Trophy },
-      { label: 'Yearly Activity', value: 'Active', icon: TrendingUp },
-      { label: 'Problem Types', value: '210 Coding + 838 MCQ', icon: Target }
-    ],
-    achievements: [
-      '1048 problems in the last year',
-      '210 coding problems solved',
-      '838 MCQ problems completed',
-      'Consistent yearly activity',
-      'Strong in data structures'
-    ],
-    languages: ['C++', 'Java', 'Python'],
-    recentActivity: 'Solved DP problems',
-    joined: 'October 2023',
-    featured: false,
-    category: 'practice'
-  },
-  {
-    id: 'geeksforgeeks',
-    name: 'GeeksforGeeks',
-    description: 'Learn computer science concepts and practice coding problems for interviews.',
-    url: 'https://www.geeksforgeeks.org/user/gvsr/',
-    username: 'gvsr',
-    logo: '💚',
-    color: 'from-emerald-400 to-emerald-600',
-    stats: [
-      { label: 'Score', value: 450, icon: Target },
-      { label: 'Problems Solved', value: 120, icon: Trophy },
-      { label: 'Articles Read', value: '200+', icon: TrendingUp }
-    ],
-    achievements: [
-      'Solved 120+ practice problems',
-      'Active in DSA practice',
-      'Regular contest participation',
-      'Strong in algorithms and data structures'
-    ],
-    languages: ['Java', 'Python', 'C++'],
-    recentActivity: 'Solved tree problems',
-    joined: 'February 2023',
-    featured: false,
-    category: 'practice'
-  }
-];
-
 export default function PlatformsShowcase({ categories = defaultCategories }: PlatformsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
 
-  const filteredPlatforms = platforms.filter(platform => 
+  const filteredPlatforms = platformsData.filter(platform => 
     selectedCategory === 'all' || platform.category === selectedCategory
   );
-
-  const featuredPlatforms = platforms.filter(platform => platform.featured);
-
-  const totalStats = {
-    platforms: platforms.length,
-    problemsSolved: platforms.reduce((acc, platform) => {
-      const problemsStat = platform.stats.find(stat => 
-        stat.label.toLowerCase().includes('problems') || 
-        stat.label.toLowerCase().includes('score')
-      );
-      return acc + (typeof problemsStat?.value === 'number' ? problemsStat.value : 0);
-    }, 0),
-    certificates: platforms.reduce((acc, platform) => {
-      const certStat = platform.stats.find(stat => 
-        stat.label.toLowerCase().includes('certificate')
-      );
-      return acc + (typeof certStat?.value === 'number' ? certStat.value : 0);
-    }, 0),
-    languages: [...new Set(platforms.flatMap(p => p.languages))].length
-  };
 
   // Handle ESC key to close modal
   useEffect(() => {
@@ -275,6 +52,69 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
       document.body.style.overflow = 'unset';
     };
   }, [selectedPlatform]);
+
+  const getStatIcon = (key: string) => {
+    switch (key) {
+      case 'solved':
+      case 'problems':
+      case 'problemsSolved':
+      case 'repositories':
+      case 'score':
+        return Trophy;
+      case 'rating':
+      case 'stars':
+      case 'followers':
+        return Star;
+      case 'ranking':
+      case 'streak':
+      case 'contributions':
+        return TrendingUp;
+      case 'contests':
+      case 'certificates':
+        return Award;
+      case 'institutionRank':
+      case 'activeDays':
+        return Target;
+      default:
+        return Trophy;
+    }
+  };
+
+  const getStatLabel = (key: string) => {
+    const labels: { [key: string]: string } = {
+      solved: 'Problems Solved',
+      problems: 'Problems',
+      problemsSolved: 'Problems Solved',
+      rating: 'Rating',
+      ranking: 'Global Ranking',
+      contests: 'Contests',
+      institutionRank: 'Institution Rank',
+      certificates: 'Certificates',
+      stars: 'Stars',
+      streak: 'Streak Days',
+      activeDays: 'Active Days',
+      score: 'Score',
+      repositories: 'Repositories',
+      followers: 'Followers',
+      contributions: 'Contributions'
+    };
+    return labels[key] || key.charAt(0).toUpperCase() + key.slice(1);
+  };
+
+  const featuredPlatforms = platformsData.filter(platform => platform.featured);
+
+  const totalStats = {
+    platforms: platformsData.length,
+    problemsSolved: platformsData.reduce((acc, platform) => {
+      const problemsStat = platform.stats && (platform.stats.solved || platform.stats.problems || platform.stats.problemsSolved || platform.stats.score);
+      return acc + (typeof problemsStat === 'number' ? problemsStat : 0);
+    }, 0),
+    certificates: platformsData.reduce((acc, platform) => {
+      const certStat = platform.stats && platform.stats.certificates;
+      return acc + (typeof certStat === 'number' ? certStat : 0);
+    }, 0),
+    languages: [...new Set(platformsData.flatMap(p => p.languages || []))].length
+  };
 
   return (
     <Container>
@@ -398,10 +238,11 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                   whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
-                  className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100`}
+                  className="bg-gradient-to-br rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100"
                   onClick={() => setSelectedPlatform(platform)}
                   style={{
                     filter: 'drop-shadow(0 0 0 transparent)',
+                    background: platform.color ? `linear-gradient(135deg, ${platform.color}dd, ${platform.color}aa)` : 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.5))';
@@ -411,17 +252,29 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   }}
                 >
                   <div className="flex items-center mb-4">
-                    <span className="text-3xl mr-3">{platform.logo}</span>
+                    {platform.logo && platform.logo.startsWith('http') ? (
+                      <div className="w-8 h-8 rounded-lg overflow-hidden mr-3 bg-white/20 flex items-center justify-center">
+                        <Image
+                          src={platform.logo}
+                          alt={platform.name}
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-3xl mr-3">{platform.logo || '🌐'}</span>
+                    )}
                     <div>
                       <h3 className="text-lg font-bold">{platform.name}</h3>
                       <p className="text-sm opacity-90">@{platform.username}</p>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    {platform.stats.slice(0, 2).map((stat, statIndex) => (
+                    {Object.entries(platform.stats || {}).slice(0, 2).map(([key, value], statIndex) => (
                       <div key={statIndex} className="flex items-center justify-between">
-                        <span className="text-sm opacity-90">{stat.label}</span>
-                        <span className="font-bold">{stat.value}</span>
+                        <span className="text-sm opacity-90">{getStatLabel(key)}</span>
+                        <span className="font-bold">{typeof value === 'number' ? value.toLocaleString() : value}</span>
                       </div>
                     ))}
                   </div>
@@ -463,7 +316,19 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
-                    <span className="text-3xl mr-3">{platform.logo}</span>
+                    {platform.logo && platform.logo.startsWith('http') ? (
+                      <div className="w-10 h-10 rounded-lg overflow-hidden mr-3 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                        <Image
+                          src={platform.logo}
+                          alt={platform.name}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-3xl mr-3">{platform.logo || '🌐'}</span>
+                    )}
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                         {platform.name}
@@ -489,18 +354,25 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                 </p>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {platform.stats.map((stat, statIndex) => (
-                    <div key={statIndex} className="text-center">
-                      <div className="text-lg font-bold text-purple-500">{stat.value}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+                {platform.stats && Object.keys(platform.stats).length > 0 && (
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {Object.entries(platform.stats).slice(0, 3).map(([key, value], statIndex) => {
+                      if (value === null || value === undefined) return null;
+                      return (
+                        <div key={statIndex} className="text-center">
+                          <div className="text-lg font-bold text-purple-500">
+                            {typeof value === 'number' ? value.toLocaleString() : value}
+                          </div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400">{getStatLabel(key)}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
 
                 {/* Languages */}
                 <div className="flex flex-wrap gap-1 mb-3">
-                  {platform.languages.slice(0, 3).map((lang, langIndex) => (
+                  {(platform.languages || []).slice(0, 3).map((lang, langIndex) => (
                     <span
                       key={langIndex}
                       className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
@@ -508,9 +380,9 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                       {lang}
                     </span>
                   ))}
-                  {platform.languages.length > 3 && (
+                  {(platform.languages || []).length > 3 && (
                     <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
-                      +{platform.languages.length - 3}
+                      +{(platform.languages || []).length - 3}
                     </span>
                   )}
                 </div>
@@ -523,6 +395,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
             ))}
           </div>
         </motion.div>
+      </div>
 
         {/* Platform Detail Modal */}
         {selectedPlatform && (
@@ -545,7 +418,19 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center">
-                    <span className="text-4xl mr-4">{selectedPlatform.logo}</span>
+                    {selectedPlatform.logo && selectedPlatform.logo.startsWith('http') ? (
+                      <div className="w-16 h-16 rounded-lg overflow-hidden mr-4 bg-gray-100 flex items-center justify-center">
+                        <Image
+                          src={selectedPlatform.logo}
+                          alt={selectedPlatform.name}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-4xl mr-4">{selectedPlatform.logo || '🌐'}</span>
+                    )}
                     <div>
                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                         {selectedPlatform.name}
@@ -575,17 +460,21 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                         Statistics
                       </h4>
                       <div className="grid grid-cols-2 gap-4">
-                        {selectedPlatform.stats.map((stat, index) => (
-                          <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                            <div className="flex items-center mb-2">
-                              <stat.icon className="w-4 h-4 text-purple-500 mr-2" />
-                              <span className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</span>
+                        {Object.entries(selectedPlatform.stats || {}).map(([key, value], index) => {
+                          if (value === null || value === undefined) return null;
+                          const StatIcon = getStatIcon(key);
+                          return (
+                            <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                              <div className="flex items-center mb-2">
+                                <StatIcon className="w-4 h-4 text-purple-500 mr-2" />
+                                <span className="text-sm text-gray-600 dark:text-gray-300">{getStatLabel(key)}</span>
+                              </div>
+                              <div className="text-xl font-bold text-gray-900 dark:text-white">
+                                {typeof value === 'number' ? value.toLocaleString() : value}
+                              </div>
                             </div>
-                            <div className="text-xl font-bold text-gray-900 dark:text-white">
-                              {stat.value}
-                            </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -613,45 +502,48 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   {/* Right Column */}
                   <div>
                     {/* Programming Languages */}
-                    <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Programming Languages
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedPlatform.languages.map((lang, index) => (
-                          <span
-                            key={index}
-                            className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
-                          >
-                            {lang}
-                          </span>
-                        ))}
+                    {selectedPlatform.languages && selectedPlatform.languages.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                          Programming Languages
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedPlatform.languages.map((lang, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                            >
+                              {lang}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Achievements */}
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Key Achievements
-                      </h4>
-                      <ul className="space-y-2">
-                        {selectedPlatform.achievements.map((achievement, index) => (
-                          <li key={index} className="flex items-start">
-                            <Trophy className="w-4 h-4 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
-                            <span className="text-gray-600 dark:text-gray-300 text-sm">
-                              {achievement}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {selectedPlatform.achievements && selectedPlatform.achievements.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                          Key Achievements
+                        </h4>
+                        <ul className="space-y-2">
+                          {selectedPlatform.achievements.map((achievement, index) => (
+                            <li key={index} className="flex items-start">
+                              <Trophy className="w-4 h-4 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
+                              <span className="text-gray-600 dark:text-gray-300 text-sm">
+                                {achievement}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </motion.div>
           </div>
         )}
-      </div>
     </Container>
   );
 }
