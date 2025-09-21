@@ -135,6 +135,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                suppressHydrationWarning
               />
             </div>
 
@@ -145,6 +146,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                suppressHydrationWarning
               >
                 {categories.map(category => (
                   <option key={category.value} value={category.value}>

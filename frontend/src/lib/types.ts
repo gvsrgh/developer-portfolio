@@ -32,6 +32,7 @@ export interface Platform {
     [key: string]: string | number;
   };
   description?: string;
+  featured?: boolean;
 }
 
 export interface TimelineItem {

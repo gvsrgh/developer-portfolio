@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { ExternalLink, Trophy, Star, Users, Code, TrendingUp, Award, Target, LucideIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ExternalLink, Trophy, Star, TrendingUp, Award, Target, LucideIcon } from 'lucide-react';
 import Container from '../../Container';
 
 interface Platform {
@@ -48,8 +48,8 @@ const platforms: Platform[] = [
     id: 'leetcode',
     name: 'LeetCode',
     description: 'Practice coding problems and prepare for technical interviews with algorithmic challenges.',
-    url: 'https://leetcode.com/u/gvsrgh/',
-    username: 'gvsrgh',
+    url: 'https://leetcode.com/u/gvsrlc/',
+    username: 'gvsrlc',
     logo: '🟠',
     color: 'from-orange-400 to-orange-600',
     stats: [
@@ -70,12 +70,90 @@ const platforms: Platform[] = [
     category: 'competitive'
   },
   {
+    id: 'codechef',
+    name: 'CodeChef',
+    description: 'Participate in competitive programming contests and improve algorithmic thinking.',
+    url: 'https://www.codechef.com/users/gvsr',
+    username: 'gvsr',
+    logo: '🍳',
+    color: 'from-amber-400 to-amber-600',
+    stats: [
+      { label: 'Current Rating', value: 1456, icon: Star },
+      { label: 'Institution Rank', value: 33, icon: Award },
+      { label: 'Contests', value: 12, icon: Trophy }
+    ],
+    achievements: [
+      'Div 3 coder (1456 rating)',
+      'Rank 33 at institution',
+      'Participated in 12+ contests',
+      'Solved 85+ competitive problems',
+      'Regular contest participation'
+    ],
+    languages: ['C++', 'Python', 'Java'],
+    recentActivity: 'Participated in long challenge',
+    joined: 'June 2023',
+    featured: true,
+    category: 'competitive'
+  },
+  {
+    id: 'codeforces',
+    name: 'Codeforces',
+    description: 'Enhance competitive programming skills through regular contests and practice.',
+    url: 'https://codeforces.com/profile/gvsr',
+    username: 'gvsr',
+    logo: '�',
+    color: 'from-red-400 to-red-600',
+    stats: [
+      { label: 'Contest Rating', value: 1562, icon: Star },
+      { label: 'Global Rank', value: '20415', icon: TrendingUp },
+      { label: 'Contests', value: 80, icon: Trophy }
+    ],
+    achievements: [
+      'Specialist rank achieved',
+      'Contest rating of 1562',
+      'Global rank 20415',
+      'Participated in 80+ rated contests',
+      'Solved 300+ problems'
+    ],
+    languages: ['C++', 'Python'],
+    recentActivity: 'Solved Div 2 problems',
+    joined: 'September 2023',
+    featured: true,
+    category: 'competitive'
+  },
+  {
+    id: 'takeuforward',
+    name: 'TakeUForward',
+    description: 'DSA learning and problem solving platform with structured courses.',
+    url: 'https://takeuforward.org/plus/profile/ram25',
+    username: 'ram25',
+    logo: '🚀',
+    color: 'from-green-400 to-green-600',
+    stats: [
+      { label: 'DSA Progress', value: '65/1006', icon: Target },
+      { label: 'Current Streak', value: 7, icon: TrendingUp },
+      { label: 'Active Days', value: 29, icon: Star }
+    ],
+    achievements: [
+      '65 DSA problems solved',
+      '7-day current streak',
+      '29 active days this year',
+      'Consistent learning progress',
+      'Structured problem solving approach'
+    ],
+    languages: ['C++', 'Java', 'Python'],
+    recentActivity: 'Solved array problems',
+    joined: 'February 2025',
+    featured: true,
+    category: 'learning'
+  },
+  {
     id: 'hackerrank',
     name: 'HackerRank',
     description: 'Develop programming skills through challenges and earn certificates in various domains.',
-    url: 'https://www.hackerrank.com/profile/gvsrgh',
-    username: 'gvsrgh',
-    logo: '🟢',
+    url: 'https://www.hackerrank.com/profile/gvsrhr',
+    username: 'gvsrhr',
+    logo: '�',
     color: 'from-green-400 to-green-600',
     stats: [
       { label: 'Certificates', value: 8, icon: Award },
@@ -94,91 +172,41 @@ const platforms: Platform[] = [
     languages: ['Python', 'Java', 'SQL', 'C'],
     recentActivity: 'Earned SQL certificate',
     joined: 'March 2023',
-    featured: true,
+    featured: false,
     category: 'practice'
   },
   {
-    id: 'github',
-    name: 'GitHub',
-    description: 'Collaborate on projects, contribute to open source, and showcase development work.',
-    url: 'https://github.com/gvsrgh',
-    username: 'gvsrgh',
-    logo: '🐙',
-    color: 'from-gray-600 to-gray-800',
+    id: 'coding-ninjas',
+    name: 'Coding Ninjas',
+    description: 'Comprehensive coding practice and interview preparation platform.',
+    url: 'https://www.naukri.com/code360/profile/gvsr',
+    username: 'gvsr',
+    logo: '🥷',
+    color: 'from-purple-400 to-purple-600',
     stats: [
-      { label: 'Repositories', value: 25, icon: Code },
-      { label: 'Followers', value: 15, icon: Users },
-      { label: 'Contributions', value: '500+', icon: TrendingUp }
+      { label: 'Problems Solved', value: 1048, icon: Trophy },
+      { label: 'Yearly Activity', value: 'Active', icon: TrendingUp },
+      { label: 'Problem Types', value: '210 Coding + 838 MCQ', icon: Target }
     ],
     achievements: [
-      '25+ public repositories',
-      '500+ contributions in the last year',
-      'Multiple full-stack projects',
-      'Active open source contributor',
-      'Consistent coding activity'
+      '1048 problems in the last year',
+      '210 coding problems solved',
+      '838 MCQ problems completed',
+      'Consistent yearly activity',
+      'Strong in data structures'
     ],
-    languages: ['JavaScript', 'Python', 'Java', 'TypeScript', 'HTML/CSS'],
-    recentActivity: 'Pushed to portfolio project',
-    joined: 'August 2022',
-    featured: true,
-    category: 'collaboration'
-  },
-  {
-    id: 'codechef',
-    name: 'CodeChef',
-    description: 'Participate in competitive programming contests and improve algorithmic thinking.',
-    url: 'https://www.codechef.com/users/gvsrgh',
-    username: 'gvsrgh',
-    logo: '🍳',
-    color: 'from-amber-400 to-amber-600',
-    stats: [
-      { label: 'Current Rating', value: 1380, icon: Star },
-      { label: 'Contests', value: 12, icon: Trophy },
-      { label: 'Problems Solved', value: 85, icon: Target }
-    ],
-    achievements: [
-      '2-star coder (1380+ rating)',
-      'Participated in 12+ contests',
-      'Solved 85+ competitive problems',
-      'Regular contest participation'
-    ],
-    languages: ['C++', 'Python', 'Java'],
-    recentActivity: 'Participated in long challenge',
-    joined: 'June 2023',
+    languages: ['C++', 'Java', 'Python'],
+    recentActivity: 'Solved DP problems',
+    joined: 'October 2023',
     featured: false,
-    category: 'competitive'
-  },
-  {
-    id: 'codeforces',
-    name: 'Codeforces',
-    description: 'Enhance competitive programming skills through regular contests and practice.',
-    url: 'https://codeforces.com/profile/gvsrgh',
-    username: 'gvsrgh',
-    logo: '🔴',
-    color: 'from-red-400 to-red-600',
-    stats: [
-      { label: 'Rating', value: 1200, icon: Star },
-      { label: 'Max Rating', value: 1285, icon: TrendingUp },
-      { label: 'Contests', value: 8, icon: Trophy }
-    ],
-    achievements: [
-      'Pupil rank achieved',
-      'Participated in 8+ rated contests',
-      'Max rating of 1285',
-      'Solved 60+ problems'
-    ],
-    languages: ['C++', 'Python'],
-    recentActivity: 'Solved Div 2 problems',
-    joined: 'September 2023',
-    featured: false,
-    category: 'competitive'
+    category: 'practice'
   },
   {
     id: 'geeksforgeeks',
     name: 'GeeksforGeeks',
     description: 'Learn computer science concepts and practice coding problems for interviews.',
-    url: 'https://auth.geeksforgeeks.org/user/gvsrgh',
-    username: 'gvsrgh',
+    url: 'https://www.geeksforgeeks.org/user/gvsr/',
+    username: 'gvsr',
     logo: '💚',
     color: 'from-emerald-400 to-emerald-600',
     stats: [
@@ -197,32 +225,6 @@ const platforms: Platform[] = [
     joined: 'February 2023',
     featured: false,
     category: 'practice'
-  },
-  {
-    id: 'coursera',
-    name: 'Coursera',
-    description: 'Complete professional courses and specializations from top universities and companies.',
-    url: 'https://www.coursera.org/user/gvsrgh',
-    username: 'gvsrgh',
-    logo: '🎓',
-    color: 'from-blue-400 to-blue-600',
-    stats: [
-      { label: 'Courses Completed', value: 6, icon: Award },
-      { label: 'Certificates', value: 4, icon: Trophy },
-      { label: 'Hours Learned', value: '150+', icon: TrendingUp }
-    ],
-    achievements: [
-      'Machine Learning Specialization (In Progress)',
-      'Google Data Analytics Certificate (Planned)',
-      'Python for Everybody Specialization',
-      'Web Development Fundamentals',
-      '150+ hours of learning'
-    ],
-    languages: ['Python', 'R', 'SQL', 'JavaScript'],
-    recentActivity: 'Started ML specialization',
-    joined: 'May 2023',
-    featured: true,
-    category: 'learning'
   }
 ];
 
@@ -254,6 +256,26 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
     languages: [...new Set(platforms.flatMap(p => p.languages))].length
   };
 
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && selectedPlatform) {
+        setSelectedPlatform(null);
+      }
+    };
+
+    if (selectedPlatform) {
+      document.addEventListener('keydown', handleEscKey);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedPlatform]);
+
   return (
     <Container>
       <div className="max-w-7xl mx-auto">
@@ -274,13 +296,13 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
           {/* Overall Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.3))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -290,13 +312,13 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
               <div className="text-sm text-gray-600 dark:text-gray-300">Active Platforms</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.3))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -306,13 +328,13 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
               <div className="text-sm text-gray-600 dark:text-gray-300">Problems Solved</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -322,13 +344,13 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
               <div className="text-sm text-gray-600 dark:text-gray-300">Certificates</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(249, 115, 22, 0.3))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -376,7 +398,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                   whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
-                  className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300`}
+                  className={`bg-gradient-to-br ${platform.color} rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100`}
                   onClick={() => setSelectedPlatform(platform)}
                   style={{
                     filter: 'drop-shadow(0 0 0 transparent)',
@@ -427,13 +449,13 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-100 cursor-pointer"
                 onClick={() => setSelectedPlatform(platform)}
                 style={{
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.3))';
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(34, 197, 94, 0.6))';
                 }}
                 onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -504,12 +526,21 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
 
         {/* Platform Detail Modal */}
         {selectedPlatform && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={(e) => {
+              // Close modal when clicking backdrop
+              if (e.target === e.currentTarget) {
+                setSelectedPlatform(null);
+              }
+            }}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">

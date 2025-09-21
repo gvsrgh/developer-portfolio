@@ -2,48 +2,84 @@ import { Platform } from '@/lib/types';
 
 export const platforms: Platform[] = [
   {
-    name: 'GitHub',
-    username: 'yourusername', // TODO: Replace with your GitHub username
-    url: 'https://github.com/yourusername', // TODO: Replace with your GitHub URL
-    description: 'Open source contributions and personal projects',
-    stats: {
-      repositories: 50, // TODO: Update with your actual stats
-      stars: 150,
-      followers: 25,
-    },
-  },
-  {
     name: 'LeetCode',
-    username: 'yourusername', // TODO: Replace with your LeetCode username
-    url: 'https://leetcode.com/yourusername', // TODO: Replace with your LeetCode URL
+    username: 'gvsrlc',
+    url: 'https://leetcode.com/u/gvsrlc/',
     description: 'Algorithmic problem solving and coding challenges',
     stats: {
-      solved: 200, // TODO: Update with your actual stats
+      solved: 150,
       ranking: '15%',
       contests: 15,
     },
+    featured: true,
   },
   {
-    name: 'HackerRank',
-    username: 'yourusername', // TODO: Replace with your HackerRank username
-    url: 'https://www.hackerrank.com/yourusername', // TODO: Replace with your HackerRank URL
-    description: 'Programming skills and certification challenges',
+    name: 'CodeChef',
+    username: 'gvsr',
+    url: 'https://www.codechef.com/users/gvsr',
+    description: 'Competitive programming contests and rating',
     stats: {
-      badges: 12, // TODO: Update with your actual stats
-      points: 1500,
-      rank: 'Gold',
+      rating: 1456,
+      institutionRank: 33,
+      contests: 12,
     },
+    featured: true,
   },
   {
     name: 'Codeforces',
-    username: 'yourusername', // TODO: Replace with your Codeforces username
-    url: 'https://codeforces.com/profile/yourusername', // TODO: Replace with your Codeforces URL
+    username: 'gvsr',
+    url: 'https://codeforces.com/profile/gvsr',
     description: 'Competitive programming contests and rating',
     stats: {
-      rating: 1400, // TODO: Update with your actual stats
-      maxRating: 1600,
-      contests: 30,
+      rating: 1562,
+      globalRank: 20415,
+      contests: 80,
+    },
+    featured: true,
+  },
+  {
+    name: 'TakeUForward',
+    username: 'ram25',
+    url: 'https://takeuforward.org/plus/profile/ram25',
+    description: 'DSA learning and problem solving platform',
+    stats: {
+      problems: 65,
+      streak: 7,
+      activeDays: 29,
+    },
+    featured: true,
+  },
+  {
+    name: 'HackerRank',
+    username: 'gvsrhr',
+    url: 'https://www.hackerrank.com/profile/gvsrhr',
+    description: 'Programming skills and certification challenges',
+    stats: {
+      certificates: 8,
+      stars: 5,
+      domainScore: 850,
     },
   },
-  // TODO: Add other platforms like CodeChef, AtCoder, etc. if you use them
+  {
+    name: 'Coding Ninjas',
+    username: 'gvsr',
+    url: 'https://www.naukri.com/code360/profile/gvsr',
+    description: 'Comprehensive coding practice and interview preparation',
+    stats: {
+      problemsSolved: 1048,
+      codingProblems: 210,
+      mcqProblems: 838,
+    },
+  },
+  {
+    name: 'GeeksforGeeks',
+    username: 'gvsr',
+    url: 'https://www.geeksforgeeks.org/user/gvsr/',
+    description: 'Practice problems and interview preparation',
+    stats: {
+      score: 450,
+      problems: 120,
+      articles: 200,
+    },
+  },
 ];

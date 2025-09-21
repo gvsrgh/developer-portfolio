@@ -3,26 +3,15 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import Container from '../../Container';
-import Button from '../../Button';
+import Container from '../Container';
+import Button from '../Button';
 import { siteConfig } from '@/data/site';
 
 export default function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Background decoration */}
-      <div 
-        className="absolute inset-0 opacity-50"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
-        }}
-      />
-      <div 
-        className="absolute inset-0 opacity-50 dark:block hidden"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%231f2937' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
-        }}
-      />
+      <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent dark:from-gray-900/50" />
       
       <Container className="relative z-10">
@@ -63,7 +52,7 @@ export default function Hero() {
                   />
                 ) : (
                   <div className="text-4xl font-bold text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                    {siteConfig.author.name.split(' ').map((word: string) => word[0]).join('')}
+                    {siteConfig.author.name.split(' ').map(word => word[0]).join('')}
                   </div>
                 )}
               </div>
@@ -229,6 +218,16 @@ export default function Hero() {
           </motion.div>
         </div>
       </Container>
+
+      {/* Background CSS for grid pattern */}
+      <style jsx>{`
+        .bg-grid-gray-100 {
+          background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e");
+        }
+        .dark .bg-grid-gray-800 {
+          background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%231f2937' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e");
+        }
+      `}</style>
     </section>
   );
 }

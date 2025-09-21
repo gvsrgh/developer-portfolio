@@ -1,143 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Award, Calendar, ExternalLink, Download, Filter, Search, CheckCircle, Star } from 'lucide-react';
 import Container from '../../Container';
-
-interface Certification {
-  id: string;
-  title: string;
-  issuer: string;
-  description: string;
-  date: string;
-  status: 'completed' | 'in-progress' | 'planned';
-  category: string;
-  credentialId?: string;
-  credentialUrl?: string;
-  certificateUrl?: string;
-  skills: string[];
-  level: 'beginner' | 'intermediate' | 'advanced';
-  featured: boolean;
-}
-
-interface Category {
-  value: string;
-  label: string;
-}
+import { 
+  certifications, 
+  defaultCertificationCategories, 
+  type Certification, 
+  type CertificationCategory 
+} from '../../../data/certifications';
 
 interface CertificationsShowcaseProps {
-  categories?: Category[];
+  categories?: CertificationCategory[];
 }
-
-const defaultCategories: Category[] = [
-  { value: 'all', label: 'All Certifications' },
-  { value: 'cloud', label: 'Cloud Computing' },
-  { value: 'data', label: 'Data Analytics' },
-  { value: 'networking', label: 'Networking' },
-  { value: 'programming', label: 'Programming' },
-  { value: 'ml', label: 'Machine Learning' },
-  { value: 'it', label: 'IT Support' }
-];
-
-const certifications: Certification[] = [
-  {
-    id: 'aws-cloud-practitioner',
-    title: 'AWS Certified Cloud Practitioner',
-    issuer: 'Amazon Web Services (AWS)',
-    description: 'Foundational level certification that validates cloud fluency and foundational AWS knowledge.',
-    date: 'Planned for Q2 2025',
-    status: 'planned',
-    category: 'cloud',
-    skills: ['Cloud Computing', 'AWS Services', 'Cloud Architecture', 'Cloud Security'],
-    level: 'beginner',
-    featured: true
-  },
-  {
-    id: 'google-data-analytics',
-    title: 'Google Data Analytics Professional Certificate',
-    issuer: 'Google Career Certificates',
-    description: 'Comprehensive program covering data analysis, data visualization, and business intelligence using industry-standard tools.',
-    date: 'Planned for Q3 2025',
-    status: 'planned',
-    category: 'data',
-    skills: ['Data Analysis', 'Data Visualization', 'SQL', 'Tableau', 'R Programming'],
-    level: 'intermediate',
-    featured: true
-  },
-  {
-    id: 'cisco-networking',
-    title: 'CCNA: Introduction to Networks',
-    issuer: 'Cisco Networking Academy',
-    description: 'Fundamental networking concepts including network protocols, network security, and network troubleshooting.',
-    date: 'In Progress - Expected Dec 2025',
-    status: 'in-progress',
-    category: 'networking',
-    skills: ['Network Fundamentals', 'TCP/IP', 'Network Security', 'Routing & Switching'],
-    level: 'intermediate',
-    featured: true
-  },
-  {
-    id: 'microsoft-azure-fundamentals',
-    title: 'Microsoft Azure Fundamentals (AZ-900)',
-    issuer: 'Microsoft',
-    description: 'Entry-level certification for Microsoft Azure cloud services and solutions.',
-    date: 'Planned for Q4 2025',
-    status: 'planned',
-    category: 'cloud',
-    skills: ['Azure Services', 'Cloud Concepts', 'Azure Pricing', 'Azure Security'],
-    level: 'beginner',
-    featured: false
-  },
-  {
-    id: 'python-institute-pcap',
-    title: 'PCAP – Certified Associate in Python Programming',
-    issuer: 'Python Institute',
-    description: 'Professional certification validating Python programming skills and knowledge.',
-    date: 'Planned for Q1 2026',
-    status: 'planned',
-    category: 'programming',
-    skills: ['Python Programming', 'Object-Oriented Programming', 'Data Structures', 'Algorithms'],
-    level: 'intermediate',
-    featured: false
-  },
-  {
-    id: 'oracle-java',
-    title: 'Oracle Certified Associate Java SE 8 Programmer',
-    issuer: 'Oracle',
-    description: 'Validates foundational knowledge of Java programming and object-oriented programming concepts.',
-    date: 'Planned for Q2 2026',
-    status: 'planned',
-    category: 'programming',
-    skills: ['Java Programming', 'Object-Oriented Programming', 'Java APIs', 'Exception Handling'],
-    level: 'intermediate',
-    featured: false
-  },
-  {
-    id: 'coursera-ml',
-    title: 'Machine Learning Specialization',
-    issuer: 'Coursera (Stanford University)',
-    description: 'Comprehensive machine learning specialization covering supervised learning, unsupervised learning, and neural networks.',
-    date: 'In Progress - Expected Q1 2026',
-    status: 'in-progress',
-    category: 'ml',
-    skills: ['Machine Learning', 'Neural Networks', 'Deep Learning', 'TensorFlow', 'Python'],
-    level: 'advanced',
-    featured: true
-  },
-  {
-    id: 'google-it-support',
-    title: 'Google IT Support Professional Certificate',
-    issuer: 'Google Career Certificates',
-    description: 'Hands-on skills in IT support including troubleshooting, customer service, networking, and system administration.',
-    date: 'Planned for Q3 2026',
-    status: 'planned',
-    category: 'it',
-    skills: ['IT Support', 'System Administration', 'Network Troubleshooting', 'Customer Service'],
-    level: 'beginner',
-    featured: false
-  }
-];
 
 const statusColors = {
   completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
@@ -151,7 +27,7 @@ const levelColors = {
   advanced: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
 };
 
-export default function CertificationsShowcase({ categories = defaultCategories }: CertificationsShowcaseProps) {
+export default function CertificationsShowcase({ categories = defaultCertificationCategories }: CertificationsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCertification, setSelectedCertification] = useState<Certification | null>(null);
@@ -171,6 +47,26 @@ export default function CertificationsShowcase({ categories = defaultCategories 
     inProgress: certifications.filter(cert => cert.status === 'in-progress').length,
     planned: certifications.filter(cert => cert.status === 'planned').length
   };
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && selectedCertification) {
+        setSelectedCertification(null);
+      }
+    };
+
+    if (selectedCertification) {
+      document.addEventListener('keydown', handleEscKey);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCertification]);
 
   return (
     <Container>
@@ -192,13 +88,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.5))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -208,13 +104,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
               <div className="text-sm text-gray-600 dark:text-gray-300">Total</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.5))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -224,13 +120,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
               <div className="text-sm text-gray-600 dark:text-gray-300">Completed</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(234, 179, 8, 0.5))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(234, 179, 8, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -240,13 +136,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
               <div className="text-sm text-gray-600 dark:text-gray-300">In Progress</div>
             </motion.div>
             <motion.div 
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-100 cursor-pointer"
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.5))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.6))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -268,6 +164,7 @@ export default function CertificationsShowcase({ categories = defaultCategories 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                suppressHydrationWarning
               />
             </div>
             
@@ -278,6 +175,7 @@ export default function CertificationsShowcase({ categories = defaultCategories 
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                suppressHydrationWarning
               >
                 {categories.map(category => (
                   <option key={category.value} value={category.value}>
@@ -308,13 +206,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                   whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
-                  className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-300"
+                  className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100"
                   onClick={() => setSelectedCertification(cert)}
                   style={{
                     filter: 'drop-shadow(0 0 0 transparent)',
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.7))';
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(168, 85, 247, 0.7))';
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -361,13 +259,13 @@ export default function CertificationsShowcase({ categories = defaultCategories 
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-100 cursor-pointer"
                 onClick={() => setSelectedCertification(cert)}
                 style={{
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(59, 130, 246, 0.5))';
+                  e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(147, 51, 234, 0.6))';
                 }}
                 onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -440,12 +338,21 @@ export default function CertificationsShowcase({ categories = defaultCategories 
 
         {/* Certification Detail Modal */}
         {selectedCertification && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={(e) => {
+              // Close modal when clicking backdrop
+              if (e.target === e.currentTarget) {
+                setSelectedCertification(null);
+              }
+            }}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-white dark:bg-gray-800 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
