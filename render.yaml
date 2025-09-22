@@ -3,6 +3,7 @@ services:
   - type: web
     name: portfolio-frontend
     env: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/out
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: out
     plan: free
