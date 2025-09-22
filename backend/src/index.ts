@@ -25,11 +25,16 @@ console.log('RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL ? '✅ Set' : '❌ M
 if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
   try {
     transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // Use SSL
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS, // Use app password for Gmail
       },
+      connectionTimeout: 60000, // 60 seconds
+      greetingTimeout: 30000, // 30 seconds
+      socketTimeout: 60000, // 60 seconds
     });
     
     // Verify the connection configuration
@@ -37,7 +42,8 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       if (error) {
         console.error('❌ Email configuration error:', error.message);
         console.warn('💡 Please check your Gmail app password in the .env file');
-        transporter = null; // Disable email if verification fails
+        // Don't disable transporter, let it try to send emails anyway
+        console.log('🔄 Will still attempt to send emails despite verification error');
       } else {
         console.log('✅ Email server is ready to send messages');
       }
@@ -195,7 +201,12 @@ app.post('/api/contact', async (req, res) => {
       message: `Thank you ${name}! Your message has been sent successfully. You should receive a confirmation email at ${email} shortly.` 
     });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('❌ Error sending email:', error);
+    console.error('📧 Email configuration status:', {
+      hasTransporter: !!transporter,
+      emailUser: process.env.EMAIL_USER ? 'Set' : 'Missing',
+      emailPass: process.env.EMAIL_PASS ? 'Set' : 'Missing'
+    });
     res.status(500).json({ 
       success: false, 
       message: 'Failed to send message. Please try again later or contact directly via email.' 
