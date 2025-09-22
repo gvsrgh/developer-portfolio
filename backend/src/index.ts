@@ -15,6 +15,12 @@ app.use(express.json());
 // Email configuration
 let transporter: nodemailer.Transporter | null = null;
 
+// Debug environment variables in production
+console.log('🔧 Environment variables check:');
+console.log('EMAIL_USER:', process.env.EMAIL_USER ? '✅ Set' : '❌ Missing');
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ Missing');
+console.log('RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL ? '✅ Set' : '❌ Missing');
+
 // Only create transporter if email credentials are provided
 if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
   try {
@@ -48,6 +54,17 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
 // Routes
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
+});
+
+app.get('/api/debug', (req, res) => {
+  res.json({ 
+    nodeEnv: process.env.NODE_ENV,
+    hasEmailUser: !!process.env.EMAIL_USER,
+    hasEmailPass: !!process.env.EMAIL_PASS,
+    hasRecipientEmail: !!process.env.RECIPIENT_EMAIL,
+    emailConfigured: !!transporter,
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.get('/', (req, res) => {
