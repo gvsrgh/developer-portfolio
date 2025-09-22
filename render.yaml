@@ -1,0 +1,9 @@
+version: "1"
+services:
+  - type: web
+    name: portfolio-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: out
+    plan: free

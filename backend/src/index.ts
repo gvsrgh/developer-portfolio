@@ -15,15 +15,26 @@ app.use(express.json());
 // Email configuration
 let transporter: nodemailer.Transporter | null = null;
 
+// Debug environment variables in production
+console.log('🔧 Environment variables check:');
+console.log('EMAIL_USER:', process.env.EMAIL_USER ? '✅ Set' : '❌ Missing');
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ Missing');
+console.log('RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL ? '✅ Set' : '❌ Missing');
+
 // Only create transporter if email credentials are provided
 if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
   try {
     transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // Use SSL
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS, // Use app password for Gmail
       },
+      connectionTimeout: 60000, // 60 seconds
+      greetingTimeout: 30000, // 30 seconds
+      socketTimeout: 60000, // 60 seconds
     });
     
     // Verify the connection configuration
@@ -31,7 +42,8 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       if (error) {
         console.error('❌ Email configuration error:', error.message);
         console.warn('💡 Please check your Gmail app password in the .env file');
-        transporter = null; // Disable email if verification fails
+        // Don't disable transporter, let it try to send emails anyway
+        console.log('🔄 Will still attempt to send emails despite verification error');
       } else {
         console.log('✅ Email server is ready to send messages');
       }
@@ -48,6 +60,17 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
 // Routes
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
+});
+
+app.get('/api/debug', (req, res) => {
+  res.json({ 
+    nodeEnv: process.env.NODE_ENV,
+    hasEmailUser: !!process.env.EMAIL_USER,
+    hasEmailPass: !!process.env.EMAIL_PASS,
+    hasRecipientEmail: !!process.env.RECIPIENT_EMAIL,
+    emailConfigured: !!transporter,
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.get('/', (req, res) => {
@@ -178,7 +201,12 @@ app.post('/api/contact', async (req, res) => {
       message: `Thank you ${name}! Your message has been sent successfully. You should receive a confirmation email at ${email} shortly.` 
     });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('❌ Error sending email:', error);
+    console.error('📧 Email configuration status:', {
+      hasTransporter: !!transporter,
+      emailUser: process.env.EMAIL_USER ? 'Set' : 'Missing',
+      emailPass: process.env.EMAIL_PASS ? 'Set' : 'Missing'
+    });
     res.status(500).json({ 
       success: false, 
       message: 'Failed to send message. Please try again later or contact directly via email.' 
