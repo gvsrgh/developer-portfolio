@@ -41,15 +41,17 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
       }
     };
 
-    if (selectedPlatform) {
+    if (selectedPlatform && typeof document !== 'undefined') {
       document.addEventListener('keydown', handleEscKey);
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscKey);
-      document.body.style.overflow = 'unset';
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('keydown', handleEscKey);
+        document.body.style.overflow = 'unset';
+      }
     };
   }, [selectedPlatform]);
 

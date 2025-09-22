@@ -208,9 +208,11 @@ export default function Hero() {
             transition={{ duration: 0.2, delay: 0.3 }}
             className="animate-bounce cursor-pointer"
             onClick={() => {
-              const aboutSection = document.getElementById('home-about');
-              if (aboutSection) {
-                aboutSection.scrollIntoView({ behavior: 'smooth' });
+              if (typeof document !== 'undefined') {
+                const aboutSection = document.getElementById('home-about');
+                if (aboutSection) {
+                  aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
               }
             }}
           >
@@ -218,16 +220,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </Container>
-
-      {/* Background CSS for grid pattern */}
-      <style jsx>{`
-        .bg-grid-gray-100 {
-          background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e");
-        }
-        .dark .bg-grid-gray-800 {
-          background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%231f2937' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e");
-        }
-      `}</style>
     </section>
   );
 }
