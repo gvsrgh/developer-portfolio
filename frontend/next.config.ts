@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true
@@ -13,7 +14,6 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   basePath: '',
-  outputFileTracingRoot: require('path').join(__dirname),
   experimental: {
     optimizePackageImports: ['framer-motion'],
   },
@@ -29,4 +29,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+export default nextConfig;
