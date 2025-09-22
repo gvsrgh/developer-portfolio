@@ -20,6 +20,31 @@ export const projects: Project[] = [
     status: 'in-progress',
   },
   {
+    slug: 'developer-portfolio',
+    title: 'Developer Portfolio Website',
+    summary: 'Personal developer portfolio showcasing projects, skills, and achievements with a modern responsive design.',
+    description: 'Built a responsive Developer Portfolio website to showcase projects, skills, and achievements. Designed with a clean UI, project highlights, and smooth navigation to provide recruiters and peers with an interactive professional profile. Implemented optimized routing, reusable React components, and SEO-friendly structure.',
+    year: '2024',
+    duration: 'Nov 2024 - Dec 2024',
+    stack: ['React.js', 'Tailwind CSS', 'JavaScript', 'Responsive Web Design', 'GitHub Pages / Vercel Deployment'],
+    category: 'web',
+    links: {
+      live: 'https://gvsr.dev/', // replace with your actual live link
+      github: 'https://github.com/gvsrgh/developer-portfolio', // replace if different repo
+    },
+    cover: '/projects/developer-portfolio-cover.jpg',
+    highlights: [
+      'Responsive portfolio with modern UI/UX',
+      'Showcased academic and personal projects',
+      'Interactive project cards with live and GitHub links',
+      'SEO-friendly metadata for better visibility',
+      'Optimized performance with clean, reusable components',
+      'Deployed on Vercel for fast, global access'
+    ],
+    featured: true,
+    status: 'in-progress',
+  },
+  {
     slug: 'networking-security',
     title: 'Networking to Security',
     summary: 'Repository of various networking projects covering networking concepts to strengthen skills in computer networking.',

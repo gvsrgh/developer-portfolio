@@ -26,11 +26,23 @@ export const defaultCertificationCategories: CertificationCategory[] = [
   { value: 'web-dev', label: 'Web Development' },
   { value: 'programming', label: 'Programming' },
   { value: 'competitive', label: 'Competitive Programming' },
-  { value: 'ml', label: 'Machine Learning' }
+  { value: 'ml', label: 'Machine Learning' },
+  { value: 'cybersecurity', label: 'Cybersecurity' }
 ];
 
 export const certifications: Certification[] = [
-  // Featured Certifications
+  {
+    id: 'azure-az900',
+    title: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
+    issuer: 'Microsoft',
+    description: 'Foundational certification covering core Azure services, cloud concepts, security, compliance, and pricing models. Planned for completion.',
+    date: 'September 2025',
+    status: 'planned',
+    category: 'cloud',
+    skills: ['Microsoft Azure', 'Cloud Fundamentals', 'Security & Compliance', 'Azure Pricing & Support'],
+    level: 'beginner',
+    featured: true
+  },
   {
     id: 'salesforce-agentforce',
     title: 'Salesforce Certified Agentforce Specialist',
@@ -40,11 +52,26 @@ export const certifications: Certification[] = [
     status: 'completed',
     category: 'cloud',
     credentialId: '6328578',
-    credentialUrl: 'https://www.salesforce.com/trailblazer/credentials',
+    credentialUrl: 'https://trailhead.salesforce.com/en/credentials/verification/',
     certificateUrl: '/documents/AgentforceSpecalist.pdf',
     skills: ['Salesforce', 'AI Automation', 'CRM', 'Cloud Computing'],
     level: 'advanced',
     featured: true
+  },
+  {
+    id: 'nptel-privacy-security',
+    title: 'Privacy and Security in Online Social Media',
+    issuer: 'NPTEL',
+    description: 'Course exploring privacy and security challenges in online social networks, covering risks, attacks, defenses, and real-world case studies.',
+    date: 'April 2025',
+    status: 'completed',
+    category: 'cybersecurity',
+    credentialId: 'NPTEL25CS79S56000210004484792',
+    credentialUrl: 'https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs79/Course/NPTEL25CS79S56000210004484792.pdf', 
+    certificateUrl: '/documents/Privacy and Security in Online Social Media.pdf',
+    skills: ['Privacy in Online Platforms', 'Security in Social Media', 'Risk Mitigation', 'Cybersecurity Awareness'],
+    level: 'intermediate',
+    featured: false,
   },
   {
     id: 'tcs-codevita',
@@ -87,23 +114,6 @@ export const certifications: Certification[] = [
     level: 'advanced',
     featured: true
   },
-  {
-    id: 'google-data-analytics',
-    title: 'Data Analytics Professional Certificate',
-    issuer: 'Google (Coursera)',
-    description: 'Comprehensive program covering data analysis, data visualization, and business intelligence using industry-standard tools.',
-    date: 'January 2024',
-    status: 'completed',
-    category: 'data',
-    credentialId: '9VUR5VL5X2LA',
-    credentialUrl: 'https://www.coursera.org/account/accomplishments/professional-cert/9VUR5VL5X2LA',
-    certificateUrl: '/documents/Google data analytics.pdf',
-    skills: ['Data Analysis', 'R Programming', 'SQL', 'Tableau', 'Data Visualization'],
-    level: 'intermediate',
-    featured: true
-  },
-
-  // Other Certifications
   {
     id: 'hackerrank-java',
     title: 'Java (Basic)',
@@ -172,9 +182,9 @@ export const certifications: Certification[] = [
     date: 'April 2024',
     status: 'completed',
     category: 'programming',
-    credentialId: 'NPTEL24CS43S969900297',
-    credentialUrl: 'https://nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS43S969900297',
-    certificateUrl: '/documents/Programming In Java.png',
+    credentialId: 'NPTEL24CS43S96990029730683381',
+    credentialUrl: 'https://archive.nptel.ac.in/content/noc/NOC24/SEM1/Ecertificates/106/noc24-cs43/Course/NPTEL24CS43S96990029730683381.pdf',
+    certificateUrl: '/documents/Programming In Java.pdf',
     skills: ['Java', 'Object-Oriented Programming', 'File Management'],
     level: 'intermediate',
     featured: false
@@ -208,6 +218,21 @@ export const certifications: Certification[] = [
     skills: ['C++', 'Problem Solving', 'STL'],
     level: 'intermediate',
     featured: false
+  },
+  {
+    id: 'google-data-analytics',
+    title: 'Data Analytics Professional Certificate',
+    issuer: 'Google (Coursera)',
+    description: 'Comprehensive program covering data analysis, data visualization, and business intelligence using industry-standard tools.',
+    date: 'January 2024',
+    status: 'completed',
+    category: 'data',
+    credentialId: '9VUR5VL5X2LA',
+    credentialUrl: 'https://coursera.org/share/9cf5067c661e0a3285c15d0df567f7f0',
+    certificateUrl: '/documents/Google data analytics.pdf',
+    skills: ['Data Analysis', 'R Programming', 'SQL', 'Tableau', 'Data Visualization'],
+    level: 'intermediate',
+    featured: true
   },
   {
     id: 'hackerrank-sql',
@@ -244,10 +269,10 @@ export const certifications: Certification[] = [
     description: 'Basic problem solving using C programming language fundamentals.',
     date: 'July 2023',
     status: 'completed',
-    category: 'competitive',
-    credentialId: 'cd7aef0',
-    credentialUrl: 'https://www.codechef.com/certificates/public/cd7aef0',
-    certificateUrl: '/documents/Problem solving 1 Chef.png',
+    category: 'programming',
+    credentialId: 'cd7aef0 (username: gvsr)',
+    credentialUrl: 'https://www.codechef.com/certificates/verify',
+    certificateUrl: '/documents/Problem solving 1 Chef.pdf',
     skills: ['C Programming', 'Problem Solving'],
     level: 'beginner',
     featured: false
@@ -259,10 +284,10 @@ export const certifications: Certification[] = [
     description: 'Intermediate problem solving using C programming with advanced algorithms.',
     date: 'July 2023',
     status: 'completed',
-    category: 'competitive',
-    credentialId: '25948d5',
-    credentialUrl: 'https://www.codechef.com/certificates/public/25948d5',
-    certificateUrl: '/documents/Problem solving 2 Chef.png',
+    category: 'programming',
+    credentialId: '25948d5 (username: gvsr)',
+    credentialUrl: 'https://www.codechef.com/certificates/verify',
+    certificateUrl: '/documents/Problem solving 2 Chef.pdf',
     skills: ['C Programming', 'Problem Solving', 'Algorithms'],
     level: 'intermediate',
     featured: false
@@ -290,8 +315,8 @@ export const certifications: Certification[] = [
     date: 'May 2023',
     status: 'completed',
     category: 'programming',
-    credentialId: '9a01714',
-    credentialUrl: 'https://www.codechef.com/certificates/public/9a01714',
+    credentialId: '9a01714 (username: gvsr)',
+    credentialUrl: 'https://www.codechef.com/certificates/verify',
     certificateUrl: '/documents/C Chef.pdf',
     skills: ['C Programming', 'Programming Fundamentals'],
     level: 'beginner',
