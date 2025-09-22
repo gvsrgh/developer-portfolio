@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true
@@ -26,10 +25,7 @@ const nextConfig: NextConfig = {
       };
     }
     return config;
-  },
-  turbopack: {
-    root: process.cwd()
   }
 };
 
-export default nextConfig;
+module.exports = nextConfig;
