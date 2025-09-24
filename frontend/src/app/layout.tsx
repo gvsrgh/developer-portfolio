@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-white dark:bg-gray-900 font-sans antialiased">
+      <body className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 font-sans antialiased">
         <Header />
         <main className="flex-1">
           <PageWrapper>

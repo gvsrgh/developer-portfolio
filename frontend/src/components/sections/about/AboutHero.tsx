@@ -1,19 +1,63 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants, type Transition } from 'framer-motion';
 import Image from 'next/image';
 import Container from '../../Container';
 import { siteConfig } from '@/data/site';
 
+/* Motion timings aligned to Experience Highlights */
+const enter: Transition = { duration: 0.6, ease: 'easeOut' };
+const snap: Transition  = { duration: 0.1, ease: 'easeOut' };
+
+/* Slide-right-on-hover (no double shift; only the row moves on X) */
+const rowVars: Variants = {
+  rest:  { x: 0 },
+  hover: { x: 10, transition: snap },
+};
+
+const dotVars: Variants = {
+  rest:  { scale: 1 },
+  hover: { scale: 1.35, transition: snap },
+};
+
+/* Reusable row with colored bullet */
+function HoverInfoRow({
+  bgHover,
+  dotClass,
+  textHoverClass,
+  children,
+}: {
+  bgHover: string;
+  dotClass: string;
+  textHoverClass: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      initial="rest"
+      animate="rest"
+      whileHover="hover"
+      variants={rowVars}
+      className={`group flex items-center space-x-3 rounded-lg p-2 -m-2 transition-all duration-100 ${bgHover}`}
+    >
+      <motion.div variants={dotVars} className={`w-2 h-2 rounded-full ${dotClass}`} />
+      <span className={`text-gray-600 dark:text-gray-300 transition-colors ${textHoverClass}`}>
+        {children}
+      </span>
+    </motion.div>
+  );
+}
+
 export default function AboutHero() {
   return (
-    <Container>
-      <div className="max-w-4xl mx-auto">
+    <section className="pt-16 pb-12 border-b border-gray-300 dark:border-gray-700 min-h-[70vh] flex items-center">
+      <Container>
+        <div className="max-w-4xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             About Me
@@ -23,7 +67,7 @@ export default function AboutHero() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -83,81 +127,36 @@ export default function AboutHero() {
               </p>
             </div>
 
-            <div className="space-y-4">
-              <motion.div 
-                className="flex items-center space-x-3 group hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
-                whileHover={{ x: 4, transition: { duration: 0.1 } }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="space-y-3"
+            >
+              <HoverInfoRow
+                bgHover="hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                dotClass="bg-blue-500"
+                textHoverClass="group-hover:text-blue-600 dark:group-hover:text-blue-400"
               >
-                <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-100">
-                  <strong>Role:</strong> {siteConfig.author.role}
-                </span>
-              </motion.div>
-              
-              <motion.div 
-                className="flex items-center space-x-3 group hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
-                whileHover={{ x: 4, transition: { duration: 0.1 } }}
-              >
-                <div className="w-2 h-2 bg-green-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-100">
-                  <strong>Location:</strong> {siteConfig.author.location}
-                </span>
-              </motion.div>
+                <strong>Role:</strong> {siteConfig.author.role}
+              </HoverInfoRow>
 
-              <motion.div 
-                className="flex items-center space-x-3 group hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
-                whileHover={{ x: 4, transition: { duration: 0.1 } }}
+              <HoverInfoRow
+                bgHover="hover:bg-green-50 dark:hover:bg-green-900/20"
+                dotClass="bg-green-500"
+                textHoverClass="group-hover:text-green-600 dark:group-hover:text-green-400"
               >
-                <div className="w-2 h-2 bg-purple-500 rounded-full group-hover:scale-150 transition-transform duration-100"></div>
-                <span className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-100">
-                  <strong>Focus Areas:</strong> 
-                  <span className="ml-2 inline-flex flex-wrap gap-2">
-                    <span 
-                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
-                      style={{
-                        filter: 'drop-shadow(0 0 0 transparent)',
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.5))';
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                      }}
-                    >
-                      Web Development
-                    </span>
-                    <span 
-                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
-                      style={{
-                        filter: 'drop-shadow(0 0 0 transparent)',
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.5))';
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                      }}
-                    >
-                      Machine Learning
-                    </span>
-                    <span 
-                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-sm font-medium hover:bg-purple-200 dark:hover:bg-purple-800 transition-all duration-100 cursor-default"
-                      style={{
-                        filter: 'drop-shadow(0 0 0 transparent)',
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.5))';
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLSpanElement>) => {
-                        e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                      }}
-                    >
-                      Mobile Apps
-                    </span>
-                  </span>
-                </span>
-              </motion.div>
-            </div>
+                <strong>Location:</strong> {siteConfig.author.location}
+              </HoverInfoRow>
+
+              <HoverInfoRow
+                bgHover="hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                dotClass="bg-purple-500"
+                textHoverClass="group-hover:text-purple-600 dark:group-hover:text-purple-400"
+              >
+                <strong>Focus Areas:</strong> Web Development, Machine Learning, Mobile Apps
+              </HoverInfoRow>
+            </motion.div>
 
             <motion.div 
               className="pt-4"
@@ -171,5 +170,6 @@ export default function AboutHero() {
         </div>
       </div>
     </Container>
+    </section>
   );
 }

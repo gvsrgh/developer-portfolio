@@ -11,26 +11,19 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Hero Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-800">
+    <div>
+      <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
         <AboutHero />
-      </section>
-
-      {/* Education Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      </div>
+      <div className="bg-white dark:bg-gray-800">
         <Education />
-      </section>
-
-      {/* Experience Section */}
-      <section className="py-20 bg-white dark:bg-gray-800">
+      </div>
+      <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800">
         <Experience />
-      </section>
-
-      {/* CV Download Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      </div>
+      <div className="bg-white dark:bg-gray-800 min-h-screen">
         <CVDownload />
-      </section>
+      </div>
     </div>
   );
 }

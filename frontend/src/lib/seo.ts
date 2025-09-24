@@ -46,7 +46,7 @@ export function generateSEO({
       title: seoTitle,
       description,
       images: [image],
-      creator: '@yourusername', // TODO: Replace with your Twitter handle
+      creator: '@gvsrgh',
     },
     icons: {
       icon: '/favicon.ico',

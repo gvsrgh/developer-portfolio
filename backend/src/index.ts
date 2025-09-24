@@ -62,16 +62,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
 });
 
-app.get('/api/debug', (req, res) => {
-  res.json({ 
-    nodeEnv: process.env.NODE_ENV,
-    hasEmailUser: !!process.env.EMAIL_USER,
-    hasEmailPass: !!process.env.EMAIL_PASS,
-    hasRecipientEmail: !!process.env.RECIPIENT_EMAIL,
-    emailConfigured: !!transporter,
-    timestamp: new Date().toISOString()
-  });
-});
+
 
 app.get('/', (req, res) => {
   res.json({ 
@@ -86,7 +77,6 @@ app.get('/status', (req, res) => {
 });
 
 app.get('/api/projects', (req, res) => {
-  // TODO: Implement project data endpoint
   res.json({ projects: [] });
 });
 

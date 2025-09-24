@@ -194,11 +194,14 @@ export default function ContactSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    whileHover={{ scale: 1.1 }}
                     className={`w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all duration-300 ${social.color}`}
                     title={`${social.label} - ${social.username}`}
                   >
-                    <social.icon className="w-6 h-6" />
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.1 } }}
+                    >
+                      <social.icon className="w-6 h-6" />
+                    </motion.div>
                   </motion.a>
                 ))}
               </div>
@@ -212,7 +215,11 @@ export default function ContactSection() {
               className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
             >
               <div className="flex items-center mb-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                <motion.div 
+                  className="w-3 h-3 bg-green-500 rounded-full mr-3"
+                  animate={{ opacity: [1, 0.4, 1] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                ></motion.div>
                 <span className="font-semibold text-green-800 dark:text-green-200">
                   Open to All Opportunities
                 </span>

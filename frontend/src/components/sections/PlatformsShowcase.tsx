@@ -108,7 +108,8 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
   const totalStats = {
     platforms: platformsData.length,
     problemsSolved: platformsData.reduce((acc, platform) => {
-      const problemsStat = platform.stats && (platform.stats.solved || platform.stats.problems || platform.stats.problemsSolved || platform.stats.score);
+      // Only count actual problem solving stats, not ratings or scores
+      const problemsStat = platform.stats && (platform.stats.solved || platform.stats.problems || platform.stats.problemsSolved);
       return acc + (typeof problemsStat === 'number' ? problemsStat : 0);
     }, 0),
     certificates: platformsData.reduce((acc, platform) => {
@@ -125,7 +126,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.1 }}
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -226,7 +227,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.1, delay: 0.05 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
@@ -238,7 +239,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   key={platform.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  transition={{ duration: 0.1, delay: 0.1 + index * 0.02 }}
                   whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                   className="bg-gradient-to-br rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100"
                   onClick={() => setSelectedPlatform(platform)}
@@ -247,9 +248,9 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                     background: platform.color ? `linear-gradient(135deg, ${platform.color}dd, ${platform.color}aa)` : 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                    // Use white glow for GitHub, platform color for others
+                    // Use black glow for GitHub, platform color for others
                     if (platform.id === 'github') {
-                      e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))';
+                      e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(0, 0, 0, 0.9))';
                     } else {
                       const hexColor = platform.color || '#3b82f6';
                       // Convert hex to RGB for the glow effect
@@ -300,7 +301,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.1, delay: 0.15 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             {selectedCategory === 'all' ? 'All Platforms' : `${categories.find(c => c.value === selectedCategory)?.label}`}
@@ -312,7 +313,7 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                 key={platform.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.1, delay: index * 0.02 }}
                 whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-100 cursor-pointer"
                 onClick={() => setSelectedPlatform(platform)}
@@ -320,9 +321,9 @@ export default function PlatformsShowcase({ categories = defaultCategories }: Pl
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  // Use white glow for GitHub, platform color for others
+                  // Use black glow for GitHub, platform color for others
                   if (platform.id === 'github') {
-                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))';
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 30px rgba(0, 0, 0, 0.9))';
                   } else {
                     const hexColor = platform.color || '#22c55e';
                     // Convert hex to RGB for the glow effect

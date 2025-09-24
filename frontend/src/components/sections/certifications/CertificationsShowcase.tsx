@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Award, Calendar, ExternalLink, Download, Filter, Search, CheckCircle, Star } from 'lucide-react';
+import { Award, Calendar, ExternalLink, Download, Filter, Search, Star } from 'lucide-react';
 import Container from '../../Container';
 import { 
   certifications, 
@@ -75,7 +75,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.1 }}
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -192,7 +192,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.1, delay: 0.05 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
@@ -204,7 +204,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
                   key={cert.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  transition={{ duration: 0.1, delay: 0.05 + index * 0.02 }}
                   whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                   className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-6 text-white cursor-pointer hover:shadow-xl transition-all duration-100"
                   onClick={() => setSelectedCertification(cert)}
@@ -245,7 +245,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.1, delay: 0.15 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
             {selectedCategory === 'all' ? 'All Certifications' : `${categories.find(c => c.value === selectedCategory)?.label} Certifications`}
@@ -257,7 +257,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
                 key={cert.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.1, delay: index * 0.02 }}
                 whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.1 } }}
                 className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-100 cursor-pointer"
                 onClick={() => setSelectedCertification(cert)}
@@ -462,38 +462,7 @@ export default function CertificationsShowcase({ categories = defaultCertificati
                       </div>
                     )}
 
-                    {/* Benefits */}
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                        Career Benefits
-                      </h4>
-                      <ul className="space-y-2">
-                        <li className="flex items-start">
-                          <CheckCircle className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
-                          <span className="text-sm text-gray-600 dark:text-gray-300">
-                            Industry-recognized validation of skills
-                          </span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
-                          <span className="text-sm text-gray-600 dark:text-gray-300">
-                            Enhanced professional credibility
-                          </span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
-                          <span className="text-sm text-gray-600 dark:text-gray-300">
-                            Improved career advancement opportunities
-                          </span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
-                          <span className="text-sm text-gray-600 dark:text-gray-300">
-                            Access to exclusive professional networks
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
+
                   </div>
                 </div>
               </div>

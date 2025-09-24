@@ -41,12 +41,13 @@ const experienceHighlights: ExperienceHighlight[] = [
 
 export default function Experience() {
   return (
-    <Container>
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 border-y border-gray-300 dark:border-gray-700">
+      <Container>
+        <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.1 }}
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -61,7 +62,7 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.1, delay: 0.05 }}
           whileHover={{ y: -4, transition: { duration: 0.1 } }}
           className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg p-8 text-white mb-12 hover:shadow-2xl transition-all duration-100"
           style={{
@@ -97,7 +98,7 @@ export default function Experience() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+              transition={{ duration: 0.1, delay: index * 0.02 }}
               whileHover={{ y: -6, transition: { duration: 0.1 } }}
               className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-2xl transition-all duration-100 group"
               style={{
@@ -130,7 +131,7 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.1, delay: 0.15 }}
           className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8"
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -151,5 +152,6 @@ export default function Experience() {
         </motion.div>
       </div>
     </Container>
+    </section>
   );
 }

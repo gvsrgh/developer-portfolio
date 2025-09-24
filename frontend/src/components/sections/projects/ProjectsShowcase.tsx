@@ -114,7 +114,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.1 }}
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -165,9 +165,9 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
               key={project.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer hover:brightness-110"
+              transition={{ duration: 0.1, delay: index * 0.02 }}
+              whileHover={{ y: -4, transition: { duration: 0.1 } }}
+              className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-100 cursor-pointer hover:brightness-110"
               onClick={() => setSelectedProject(project)}
               style={{ filter: 'drop-shadow(0 0 0 transparent) brightness(1)' }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -185,16 +185,16 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                       src={project.cover}
                       alt={project.title}
                       fill
-                      className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover z-0 group-hover:scale-105 transition-transform duration-100"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {/* Hover overlay for images */}
                     <div
                       className="pointer-events-none absolute inset-0 z-10
                                  bg-black/0 group-hover:bg-black/20
-                                 transition-opacity duration-300 flex items-center justify-center"
+                                 transition-opacity duration-100 flex items-center justify-center"
                     >
-                      <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-100">
                         View Details
                       </span>
                     </div>
@@ -203,7 +203,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                   <div
                     className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
                       getCategoryFromProject(project)
-                    )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
+                    )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-100`}
                   >
                     <div className="text-center px-4">
                       <h3 className="text-white font-bold text-lg mb-2">{project.title}</h3>
@@ -309,6 +309,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.1 }}
               className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
               tabIndex={-1}
@@ -338,15 +339,15 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                             src={selectedProject.cover}
                             alt={selectedProject.title}
                             fill
-                            className="object-cover z-0 group-hover:scale-105 transition-transform duration-300"
+                            className="object-cover z-0 group-hover:scale-105 transition-transform duration-100"
                             sizes="(max-width: 768px) 100vw, 50vw"
                           />
                           <div
                             className="pointer-events-none absolute inset-0 z-10
                                        bg-black/0 group-hover:bg-black/20
-                                       transition-opacity duration-300 flex items-center justify-center"
+                                       transition-opacity duration-100 flex items-center justify-center"
                           >
-                            <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-100">
                               Click to Zoom
                             </span>
                           </div>
@@ -355,7 +356,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
                         <div
                           className={`w-full h-full bg-gradient-to-br ${getCategoryGradient(
                             getCategoryFromProject(selectedProject)
-                          )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300`}
+                          )} flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-100`}
                         >
                           <div className="text-center px-4">
                             <h3 className="text-white font-bold text-xl mb-2">{selectedProject.title}</h3>
@@ -468,6 +469,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.1 }}
               className="relative w-[80vw] h-[80vh]"
               onClick={(e) => e.stopPropagation()}
               tabIndex={-1}
@@ -475,7 +477,7 @@ export default function ProjectsShowcase({ categories = defaultCategories }: Pro
               {/* Close button positioned at top-right of image */}
               <button
                 onClick={() => setZoomedImage(null)}
-                className="absolute -top-4 -right-4 z-10 text-white bg-black/70 hover:bg-black/90 rounded-full p-3 transition-all duration-200 shadow-lg border-2 border-white/20"
+                className="absolute -top-4 -right-4 z-10 text-white bg-black/70 hover:bg-black/90 rounded-full p-3 transition-all duration-100 shadow-lg border-2 border-white/20"
                 aria-label="Close image"
               >
                 <X className="w-6 h-6" />

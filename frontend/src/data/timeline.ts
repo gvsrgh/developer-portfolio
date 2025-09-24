@@ -2,37 +2,34 @@ import { TimelineItem } from '@/lib/types';
 
 export const timeline: TimelineItem[] = [
   {
-    title: 'Bachelor of Technology in Computer Science', // TODO: Update with your degree
-    org: 'Your University', // TODO: Replace with your university name
+    title: 'Bachelor of Technology in Computer Science',
+    org: 'Prasad V Potluri Siddhartha Institute of Technology',
     start: '2021',
-    end: '2025', // TODO: Update with your graduation year
-    description: 'Studying computer science fundamentals, data structures, algorithms, and software engineering principles.',
+    end: '2025',
+    description: 'Studying computer science fundamentals, data structures, algorithms, and software engineering principles with hands-on experience in modern web technologies.',
     type: 'education',
   },
   {
-    title: 'Full Stack Developer Intern', // TODO: Update with your role
-    org: 'Tech Company', // TODO: Replace with company name
+    title: 'Full Stack Developer',
+    org: 'Freelance Projects',
     start: 'Jun 2024',
-    end: 'Aug 2024', // TODO: Update dates or remove 'end' if ongoing
-    description: 'Developed web applications using React and Node.js, collaborated with cross-functional teams, and gained experience in agile development methodologies.',
+    description: 'Developed multiple web applications using React, Next.js, and Node.js. Built responsive user interfaces and implemented backend APIs for various client projects.',
     type: 'work',
   },
   {
-    title: 'Best Project Award', // TODO: Update with your achievement
-    org: 'University Hackathon', // TODO: Replace with event name
+    title: 'Best Innovation Award',
+    org: 'College Technical Fest',
     start: 'Mar 2024',
-    description: 'Won first place for developing an innovative solution that addresses real-world problems using modern web technologies.',
+    description: 'Won first place for developing an innovative solution that addresses real-world problems using modern web technologies and machine learning.',
     type: 'award',
   },
   {
-    title: 'AWS Cloud Practitioner', // TODO: Update with your certification
-    org: 'Amazon Web Services', // TODO: Replace with certifying organization
+    title: 'Google Data Analytics Professional Certificate',
+    org: 'Google Career Certificates',
     start: 'Jan 2024',
-    description: 'Validated foundational knowledge of AWS cloud concepts, services, and basic architectural principles.',
+    description: 'Completed comprehensive data analytics certification covering data collection, processing, analysis, and visualization using industry-standard tools.',
     type: 'certification',
   },
-  // TODO: Add more timeline items based on your actual experience
-  // Remove or modify these sample entries to match your background
 ];
 
 export const getTimelineByType = (type: TimelineItem['type']) => 

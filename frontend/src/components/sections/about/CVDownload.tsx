@@ -19,17 +19,18 @@ export default function CVDownload() {
   };
 
   return (
-    <Container>
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20">
+      <Container>
+        <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          whileHover={{ y: -4 }}
+          transition={{ duration: 0.1 }}
+          whileHover={{ y: -4, transition: { duration: 0.1 } }}
           className="text-center"
         >
           <div 
-            className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg transition-all duration-500"
+            className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-100"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
@@ -42,11 +43,10 @@ export default function CVDownload() {
           >
             <motion.div 
               className="flex justify-center mb-6"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
             >
               <div 
-                className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center transition-all duration-300"
+                className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center transition-all duration-100"
                 style={{
                   filter: 'drop-shadow(0 0 0 transparent)',
                 }}
@@ -62,8 +62,8 @@ export default function CVDownload() {
             </motion.div>
 
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              whileHover={{ scale: 1.02 }}
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-100"
+              whileHover={{ scale: 1.02, transition: { duration: 0.1 } }}
             >
               Download My CV
             </motion.h2>
@@ -74,54 +74,24 @@ export default function CVDownload() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <motion.div 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  filter: 'drop-shadow(0 0 0 transparent)',
-                  transition: 'all 0.3s ease-in-out',
-                }}
-                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.4))';
-                }}
-                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                }}
+              <Button
+                onClick={handleDownloadCV}
+                size="lg"
+                className="inline-flex items-center"
               >
-                <Button
-                  onClick={handleDownloadCV}
-                  size="lg"
-                  className="inline-flex items-center"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download CV (PDF)
-                </Button>
-              </motion.div>
+                <Download className="w-5 h-5 mr-2" />
+                Download CV (PDF)
+              </Button>
               
-              <motion.div 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  filter: 'drop-shadow(0 0 0 transparent)',
-                  transition: 'all 0.3s ease-in-out',
-                }}
-                onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(168, 85, 247, 0.4))';
-                }}
-                onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
-                }}
+              <Button
+                href="/contact"
+                variant="outline"
+                size="lg"
+                className="inline-flex items-center"
               >
-                <Button
-                  href="/contact"
-                  variant="outline"
-                  size="lg"
-                  className="inline-flex items-center"
-                >
-                  <Mail className="w-5 h-5 mr-2" />
-                  Contact Me
-                </Button>
-              </motion.div>
+                <Mail className="w-5 h-5 mr-2" />
+                Contact Me
+              </Button>
             </div>
 
             {/* Quick contact info */}
@@ -132,8 +102,8 @@ export default function CVDownload() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
                 <motion.div 
-                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
-                  whileHover={{ x: 4 }}
+                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
+                  whileHover={{ x: 4, transition: { duration: 0.1 } }}
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   <a 
@@ -147,8 +117,8 @@ export default function CVDownload() {
                 <div className="hidden sm:block w-1 h-1 bg-gray-400 rounded-full"></div>
                 
                 <motion.div 
-                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-300"
-                  whileHover={{ x: 4 }}
+                  className="flex items-center text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg p-2 -m-2 transition-all duration-100"
+                  whileHover={{ x: 4, transition: { duration: 0.1 } }}
                 >
                   <span>📍 {siteConfig.author.location}</span>
                 </motion.div>
@@ -157,8 +127,8 @@ export default function CVDownload() {
 
             {/* CV Preview Info */}
             <motion.div 
-              className="mt-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300"
-              whileHover={{ scale: 1.02 }}
+              className="mt-8 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-100"
+              whileHover={{ scale: 1.02, transition: { duration: 0.1 } }}
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
@@ -174,31 +144,31 @@ export default function CVDownload() {
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600 dark:text-gray-300">
                 <motion.div 
-                  className="flex items-center hover:text-green-600 dark:hover:text-green-400 transition-colors duration-300"
-                  whileHover={{ x: 2 }}
+                  className="flex items-center hover:text-green-600 dark:hover:text-green-400 transition-colors duration-100"
+                  whileHover={{ x: 2, transition: { duration: 0.1 } }}
                 >
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 hover:scale-150 transition-transform duration-100"></div>
                   Education Details
                 </motion.div>
                 <motion.div 
-                  className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                  whileHover={{ x: 2 }}
+                  className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-100"
+                  whileHover={{ x: 2, transition: { duration: 0.1 } }}
                 >
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 hover:scale-150 transition-transform duration-100"></div>
                   Work Experience
                 </motion.div>
                 <motion.div 
-                  className="flex items-center hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300"
-                  whileHover={{ x: 2 }}
+                  className="flex items-center hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-100"
+                  whileHover={{ x: 2, transition: { duration: 0.1 } }}
                 >
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2 hover:scale-150 transition-transform duration-100"></div>
                   Technical Skills
                 </motion.div>
                 <motion.div 
-                  className="flex items-center hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-300"
-                  whileHover={{ x: 2 }}
+                  className="flex items-center hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-100"
+                  whileHover={{ x: 2, transition: { duration: 0.1 } }}
                 >
-                  <div className="w-2 h-2 bg-orange-500 rounded-full mr-2 hover:scale-150 transition-transform duration-300"></div>
+                  <div className="w-2 h-2 bg-orange-500 rounded-full mr-2 hover:scale-150 transition-transform duration-100"></div>
                   Project Portfolio
                 </motion.div>
               </div>
@@ -207,5 +177,6 @@ export default function CVDownload() {
         </motion.div>
       </div>
     </Container>
+    </section>
   );
 }

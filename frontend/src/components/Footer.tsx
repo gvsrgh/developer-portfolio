@@ -63,19 +63,27 @@ export default function Footer() {
                   const Icon = socialIcons[platform as keyof typeof socialIcons];
                   if (!Icon) return null;
                   
+                  // Set specific colors for each platform
+                  const hoverColor = platform === 'linkedin' 
+                    ? 'hover:text-blue-600' 
+                    : 'hover:text-gray-900 dark:hover:text-white';
+                  
                   return (
-                    <motion.a
+                    <a
                       key={platform}
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                      className={`p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 text-gray-600 dark:text-gray-400 ${hoverColor}`}
                       aria-label={`Visit ${platform}`}
                     >
-                      <Icon size={20} />
-                    </motion.a>
+                      <motion.div
+                        whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.1 } }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Icon size={20} />
+                      </motion.div>
+                    </a>
                   );
                 })}
               </div>

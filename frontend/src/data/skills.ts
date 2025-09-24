@@ -12,7 +12,6 @@ export const skills: SkillCategory[] = [
       'SQL',
       'HTML',
       'CSS',
-      // TODO: Add/remove languages based on your skills
     ],
   },
   {
@@ -26,7 +25,6 @@ export const skills: SkillCategory[] = [
       'Tailwind CSS',
       'Material-UI',
       'Chakra UI',
-      // TODO: Add/remove frontend frameworks you know
     ],
   },
   {
@@ -42,7 +40,6 @@ export const skills: SkillCategory[] = [
       'Redis',
       'Prisma',
       'Mongoose',
-      // TODO: Add/remove backend technologies you know
     ],
   },
   {
@@ -56,7 +53,6 @@ export const skills: SkillCategory[] = [
       'Netlify',
       'GitHub Actions',
       'CI/CD',
-      // TODO: Add/remove cloud and DevOps tools you know
     ],
   },
   {
@@ -72,7 +68,6 @@ export const skills: SkillCategory[] = [
       'Webpack',
       'Vite',
       'ESLint',
-      // TODO: Add/remove tools you use
     ],
   },
 ];

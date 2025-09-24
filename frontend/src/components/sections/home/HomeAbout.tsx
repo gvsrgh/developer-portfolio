@@ -50,7 +50,7 @@ function HoverInfoRow({
 
 export default function HomeAbout() {
   return (
-    <section id="home-about" className="py-20 bg-white dark:bg-gray-800">
+    <section id="home-about" className="py-12 bg-white dark:bg-gray-800">
       <Container>
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">

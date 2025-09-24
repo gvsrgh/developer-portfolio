@@ -1,7 +1,7 @@
 import { SiteConfig } from '@/lib/types';
 
 export const siteConfig: SiteConfig = {
-  name: 'Govvala Venkata Sai Ram - Developer Portfolio',
+  name: 'GVSR',
   description: 'Final-year Computer Science student specializing in full-stack development, machine learning, and modern web technologies. Building innovative solutions with React, Next.js, and AI.',
   url: 'https://gvsrgh.github.io',
   ogImage: '/og-image.jpg',
