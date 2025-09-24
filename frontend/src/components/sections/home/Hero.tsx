@@ -9,21 +9,21 @@ import { siteConfig } from '@/data/site';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Background decoration */}
       <div 
-        className="absolute inset-0 opacity-50"
+        className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
+          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23e5e7eb' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
         }}
       />
       <div 
-        className="absolute inset-0 opacity-50 dark:block hidden"
+        className="absolute inset-0 opacity-30 dark:block hidden"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%231f2937' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
+          backgroundImage: `url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23374151' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 40v-40h40v40z'/%3e%3c/g%3e%3c/svg%3e")`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent dark:from-gray-900/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-200/60 to-transparent dark:from-gray-900/60" />
       
       <Container className="relative z-10">
         <div className="text-center max-w-4xl mx-auto">
@@ -36,18 +36,18 @@ export default function Hero() {
             className="mb-8 group"
           >
             <div 
-              className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 p-1 transition-all duration-300"
+              className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-gray-400 to-gray-500 dark:from-gray-600 dark:to-gray-700 p-1 transition-all duration-300"
               style={{
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(59, 130, 246, 0.5))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 25px rgba(107, 114, 128, 0.5))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
               }}
             >
-              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors duration-300">
+              <div className="w-full h-full rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors duration-300">
                 {siteConfig.author.avatar ? (
                   <Image
                     src={siteConfig.author.avatar}
@@ -62,7 +62,7 @@ export default function Hero() {
                     priority
                   />
                 ) : (
-                  <div className="text-4xl font-bold text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  <div className="text-4xl font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
                     {siteConfig.author.name.split(' ').map((word: string) => word[0]).join('')}
                   </div>
                 )}
@@ -74,14 +74,14 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             whileHover={{ scale: 1.02 }}
-            className="text-4xl md:text-6xl font-bold text-gray-700 dark:text-gray-200 mb-4 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-300 cursor-default"
+            className="text-4xl md:text-6xl font-bold text-gray-700 dark:text-gray-200 mb-4 hover:text-gray-800 dark:hover:text-gray-100 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLHeadingElement>) => {
-              e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))';
+              e.currentTarget.style.filter = 'drop-shadow(0 0 15px rgba(107, 114, 128, 0.3))';
             }}
             onMouseLeave={(e: React.MouseEvent<HTMLHeadingElement>) => {
               e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -94,14 +94,14 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             whileHover={{ scale: 1.02 }}
-            className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-6 hover:text-purple-500 dark:hover:text-purple-300 transition-all duration-300 cursor-default"
+            className="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-6 hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLParagraphElement>) => {
-              e.currentTarget.style.filter = 'drop-shadow(0 0 12px rgba(147, 51, 234, 0.3))';
+              e.currentTarget.style.filter = 'drop-shadow(0 0 12px rgba(107, 114, 128, 0.3))';
             }}
             onMouseLeave={(e: React.MouseEvent<HTMLParagraphElement>) => {
               e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -114,14 +114,14 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             whileHover={{ scale: 1.01 }}
-            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto hover:text-green-500 dark:hover:text-green-300 transition-all duration-300 cursor-default"
+            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-300 cursor-default"
             style={{
               filter: 'drop-shadow(0 0 0 transparent)',
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLParagraphElement>) => {
-              e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(34, 197, 94, 0.3))';
+              e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(107, 114, 128, 0.3))';
             }}
             onMouseLeave={(e: React.MouseEvent<HTMLParagraphElement>) => {
               e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -134,7 +134,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.25 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <motion.div
@@ -144,7 +144,7 @@ export default function Hero() {
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.4))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(107, 114, 128, 0.4))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -161,7 +161,7 @@ export default function Hero() {
                 filter: 'drop-shadow(0 0 0 transparent)',
               }}
               onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.4))';
+                e.currentTarget.style.filter = 'drop-shadow(0 0 20px rgba(107, 114, 128, 0.4))';
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -177,7 +177,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.25 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
             className="flex justify-center space-x-6 mb-16"
           >
             {Object.entries(siteConfig.social).map(([platform, url]) => {
@@ -200,7 +200,7 @@ export default function Hero() {
                     filter: 'drop-shadow(0 0 0 transparent)',
                   }}
                   onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    e.currentTarget.style.filter = 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.4))';
+                    e.currentTarget.style.filter = 'drop-shadow(0 0 8px rgba(107, 114, 128, 0.4))';
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                     e.currentTarget.style.filter = 'drop-shadow(0 0 0 transparent)';
@@ -216,7 +216,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.35 }}
             className="animate-bounce cursor-pointer"
             onClick={() => {
               const aboutSection = document.getElementById('home-about');

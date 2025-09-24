@@ -31,14 +31,14 @@ export default function HomeFeaturedProjects() {
   }, [zoomedImage, selectedProject]);
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section className="py-20 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 border-y border-gray-300 dark:border-gray-700">
       <Container>
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -57,13 +57,13 @@ export default function HomeFeaturedProjects() {
                 key={project.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group relative hover:shadow-blue-500/20 hover:ring-1 hover:ring-blue-500/20 cursor-pointer"
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                whileHover={{ y: -8, transition: { duration: 0.1 } }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-100 overflow-hidden group relative hover:shadow-blue-500/20 hover:ring-1 hover:ring-blue-500/20 cursor-pointer"
                 onClick={() => setSelectedProject(project)}
                 style={{
                   filter: 'drop-shadow(0 0 0 transparent)',
-                  transition: 'all 0.5s ease-in-out, filter 0.5s ease-in-out',
+                  transition: 'all 0.1s ease-in-out, filter 0.1s ease-in-out',
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLDivElement).style.filter =
@@ -81,20 +81,20 @@ export default function HomeFeaturedProjects() {
                         src={project.cover}
                         alt={project.title}
                         fill
-                        className="object-cover z-0 transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover z-0 transition-transform duration-100 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       {/* Soft bottom gradient for readability */}
-                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/40 transition-all duration-300" />
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/40 transition-all duration-100" />
                       {/* View Details Overlay */}
-                      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-100">
                         <div className="bg-black/50 text-white px-3 py-1 rounded-lg text-sm backdrop-blur-sm">
                           Click for details
                         </div>
                       </div>
                     </>
                   ) : (
-                    <div className="h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-300">
+                    <div className="h-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center group-hover:from-purple-500 group-hover:to-blue-600 transition-all duration-100">
                       <h3 className="text-white font-bold text-lg text-center px-4">{project.title}</h3>
                     </div>
                   )}
@@ -116,7 +116,7 @@ export default function HomeFeaturedProjects() {
 
                 {/* Project Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-100">
                     {project.title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">{project.summary}</p>
@@ -130,7 +130,7 @@ export default function HomeFeaturedProjects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors hover:scale-110 transform duration-200"
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors hover:scale-110 transform duration-100"
                           title="View Code"
                         >
                           <Github size={18} />
@@ -142,7 +142,7 @@ export default function HomeFeaturedProjects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors hover:scale-110 transform duration-200"
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors hover:scale-110 transform duration-100"
                           title="Live Demo"
                         >
                           <ExternalLink size={18} />
@@ -159,7 +159,7 @@ export default function HomeFeaturedProjects() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             className="text-center"
           >
             <Button href="/projects" size="lg">

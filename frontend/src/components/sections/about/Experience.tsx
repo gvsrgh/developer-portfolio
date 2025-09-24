@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Code, Users, Target, Lightbulb, LucideIcon } from 'lucide-react';
 import Container from '../../Container';
+import Button from '../../Button';
 
 interface ExperienceHighlight {
   icon: LucideIcon;
@@ -140,18 +141,12 @@ export default function Experience() {
             learn from experienced teams, and contribute to meaningful projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/projects"
-              className="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors hover:scale-105 transform duration-200"
-            >
+            <Button href="/projects" size="lg">
               View My Projects
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-6 py-3 border-2 border-purple-500 text-purple-500 rounded-lg font-medium hover:bg-purple-500 hover:text-white transition-colors hover:scale-105 transform duration-200"
-            >
+            </Button>
+            <Button href="/contact" variant="outline" size="lg">
               Get In Touch
-            </a>
+            </Button>
           </div>
         </motion.div>
       </div>
