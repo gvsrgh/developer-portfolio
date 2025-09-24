@@ -1,39 +1,60 @@
-# 🚀 Modern Portfolio - Full Stack Application
+# 🚀 GVSR - Developer Portfolio
 
-> A professional, responsive portfolio website showcasing projects, skills, and experience with modern web technologies.
-
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.17-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live](https://img.shields.io/badge/Live-gvsr.dev-green?logo=vercel)](https://gvsr.dev)
 
 ## ✨ Features
 
-- 🎨 **Modern Design** - Clean, professional UI with smooth animations
-- 📱 **Fully Responsive** - Perfect on desktop, tablet, and mobile
-- ⚡ **High Performance** - Optimized for speed and SEO
-- � **Easy Deployment** - Ready for Vercel, Netlify, and other platforms
-- 🔧 **Type Safe** - Built with TypeScript for reliability
-- 🎭 **Interactive** - Engaging animations with Framer Motion
-- 📧 **Contact Form** - Functional contact system
-- 🌓 **Theme Support** - Light/dark mode ready
+- 🎨 **Modern Design** - Clean, professional UI with 0.1s consistent animations
+- 📱 **Fully Responsive** - Perfect on desktop, tablet, and mobile devices
+- ⚡ **High Performance** - Optimized for speed, SEO, and user experience
+- 🏆 **Dynamic Stats** - Auto-updating problem counts (2463+ problems solved)
+- 🔧 **Type Safe** - Built with TypeScript for maximum reliability
+- 🎭 **Interactive Animations** - Smooth hover effects and transitions
+- 📧 **Functional Contact** - Working contact form with email integration
+- 🌓 **Theme Support** - Light/dark mode with consistent branding
+- 📊 **Platform Integration** - Showcasing 8+ coding platforms and achievements
+- 🎯 **Professional Animations** - Come-forward/backward effects with perfect timing
 
 ## 🖥️ Live Demo
 
-🔗 **Live Portfolio: Updating Soon** 🚀
+🔗 **[gvsr.dev](https://gvsr.dev)** - Experience the portfolio live!
 
-## 📸 Screenshots
+> **💡 Tip**: Please read the [Contributing Guidelines](CONTRIBUTING.md) before exploring the codebase or making contributions.
 
-📷 **Screenshots: Updating Soon** ✨
+## 📷 Screenshots
 
 <details>
-<summary>Preview images will be available soon</summary>
+<summary>🎨 Click to view portfolio screenshots</summary>
 
-🎨 **Coming Soon:**
-- Desktop responsive design preview
-- Mobile-optimized interface showcase  
-- Interactive component demonstrations
-- Dark/light theme comparisons
+### 🏠 Home Page
+![Home Hero Section](screenshots/home-hero.png)
+*Clean, professional landing page with dynamic animations and my name*
+
+### 👨‍💻 About Section  
+![About Page](screenshots/about-page.png)
+*Personal information, skills showcase, and professional timeline*
+
+### 🚀 Projects Gallery
+![Projects Showcase](screenshots/projects-showcase.png)
+*Interactive project showcase with filtering and detailed views*
+
+### 🏆 Platforms Dashboard
+![Platforms Dashboard](screenshots/platforms-dashboard.png)
+*Dynamic stats from 8+ coding platforms showing 2463+ problems solved*
+
+### 📜 Certifications
+![Certifications Display](screenshots/certifications-display.png)
+*Professional certifications and achievements display*
+
+### 📞 Contact Page
+![Contact Form](screenshots/contact-form.png)
+*Functional contact form with live availability status and blinking green indicator*
+
+
 
 </details>
 
@@ -48,15 +69,16 @@ portfolio/
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js 15** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **Framer Motion** - Smooth animations
-- **Lucide React** - Beautiful icons
+- **Next.js 15.5.3** - React 19.1.0 framework with App Router
+- **TypeScript 5** - Complete type safety and developer experience
+- **Tailwind CSS 3.4.17** - Utility-first styling with custom animations
+- **Framer Motion 12.23.16** - Professional animations and transitions
+- **Lucide React 0.544.0** - Beautiful, consistent icons
 
-### Backend (Optional)
-- **Node.js + Express** - REST API
-- **TypeScript** - Type safety
+### Backend
+- **Node.js + Express.js** - REST API for contact form
+- **Nodemailer** - Email service integration with Gmail
+- **TypeScript** - Type-safe backend development
 - **CORS** - Cross-origin resource sharing
 
 ## 🚀 Quick Start
@@ -75,14 +97,12 @@ cd portfolio
 # Install dependencies
 npm run install:all
 
-# Start frontend development server
+# Start development server
 npm run dev
 
-# Or start frontend only
-npm run dev:frontend
-
-# Start backend (if needed)
-npm run dev:backend
+# Or start services individually
+npm run dev:frontend  # Frontend only (http://localhost:3000)
+npm run dev:backend   # Backend API (http://localhost:8000)
 ```
 
 ## 📝 Available Scripts
@@ -139,11 +159,19 @@ backend/               # Optional backend
 
 ## 🎨 Customization
 
+### 📋 Data Configuration
 1. **Personal Information**: Update `frontend/src/data/site.ts`
-2. **Projects**: Modify `frontend/src/data/projects.ts`
-3. **Skills**: Edit `frontend/src/data/skills.ts`
-4. **Timeline**: Update `frontend/src/data/timeline.ts`
-5. **Platforms**: Update `frontend/src/data/platforms.ts`
+2. **Projects Showcase**: Modify `frontend/src/data/projects.ts`
+3. **Skills & Technologies**: Edit `frontend/src/data/skills.ts`
+4. **Professional Timeline**: Update `frontend/src/data/timeline.ts`
+5. **Coding Platforms**: Update `frontend/src/data/platforms.ts`
+6. **Certifications**: Modify `frontend/src/data/certifications.ts`
+
+### 🎯 Key Features to Customize
+- **Stats Auto-Update**: Platform stats automatically calculate from data
+- **Animation Timing**: All animations use consistent 0.1s timing
+- **Color Schemes**: Professional color palette with hover effects
+- **Contact Integration**: Functional email system with auto-replies
 
 ## 🚢 Deployment
 
@@ -210,20 +238,27 @@ If this project helped you, please consider:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information about our development process, coding standards, and submission guidelines.
 
+**Quick Start for Contributors:**
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup and guidelines
+3. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+4. Follow our coding standards and animation timing (0.1s consistency)
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+6. Push to the branch (`git push origin feature/AmazingFeature`) 
+7. Open a Pull Request with detailed description
+
+**Before Contributing**: Please ensure you understand our animation standards, data structure patterns, and TypeScript conventions outlined in the contributing guide.
 
 ## 👨‍💻 Author
 
-**GVSR**
-- GitHub: [@gvsrgh](https://github.com/gvsrgh)
-- LinkedIn: [GVSR](https://linkedin.com/in/gvsr)
-- Portfolio: [Basic](https://gvsrgh.github.io/My-Personal-Website/)
+**Govvala Venkata Sai Ram (GVSR)**
+- 🌐 Portfolio: [gvsr.dev](https://gvsr.dev)
+- 💼 GitHub: [@gvsrgh](https://github.com/gvsrgh)
+- 🔗 LinkedIn: [gvsr](https://linkedin.com/in/gvsr)
+- 📧 Email: saigovvala2346@gmail.com
+- 🏆 Achievements: 2463+ problems solved across platforms
 
 ## 🙏 Acknowledgments
 
