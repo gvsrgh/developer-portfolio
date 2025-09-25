@@ -24,8 +24,8 @@ export const projects: Project[] = [
     title: 'Developer Portfolio Website',
     summary: 'Personal developer portfolio showcasing projects, skills, and achievements with a modern responsive design.',
     description: 'Built a responsive Developer Portfolio website to showcase projects, skills, and achievements. Designed with a clean UI, project highlights, and smooth navigation to provide recruiters and peers with an interactive professional profile. Implemented optimized routing, reusable React components, and SEO-friendly structure.',
-    year: '2024',
-    duration: 'Nov 2024 - Dec 2024',
+    year: '2025',
+    duration: 'Sep 2025',
     stack: ['React.js', 'Tailwind CSS', 'JavaScript', 'Responsive Web Design', 'GitHub Pages / Vercel Deployment'],
     category: 'web',
     links: {
